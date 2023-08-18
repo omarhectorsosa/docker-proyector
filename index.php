@@ -95,8 +95,8 @@
               <img src="./img/internet.jpg" class="rounded-circle" alt="kira-icon" width="30" height="30">
             </div>
             <div class="col-10 mt-3">
-              <h1 class="title1">Kira Whittle</h1>
-              <h2 class="subtitle1">Verified Graduate</h2>
+              <h1 class="title"><a href="../carrete/so/index.html"> Introducción a la PC </a></h1>
+              <h2 class="subtitle1">Conceptos básicos informatica</h2>
             </div>
           </div>
           <div class="row mt-2">

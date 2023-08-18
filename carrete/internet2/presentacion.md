@@ -12,21 +12,29 @@ class: animated fadeInUp
 
 (Primera parte estimado: 2h)
 
-* Redes de computadoras
+* Conceptos introductorios
+  - ¿Qué es Firewall de Windows?
+  - Virus: ¿Qué son los virus, los gusanos y los caballos de Troya?
+  - Antivirus: Validación, Activación y Chequeo. 
+* Redes
   - ¿Que es una red y como funciona?
   - Clasificacion de red
     - Por topologia
     - Por tamaño
     - Intranet y extranet
-* Internet: Red de redes
-  - Pequeño paso por la historia de internet. 
-  - Concepto de intranet y extranet
-  - Manejo de intranet de la universidad. 
+* Internet
+  - Tipo de accesos: Dial-Dap, ADLS, Wireless, Cable electrico, Modem
+  - Nuevos servicios de conexion 
+  - Artefactos: Router(enrutador), Hub(repetidor multipuerto), Switch(conmutador)
+  - Software de comunicacion
+    
 
 ---
 
 (Segunda parte estimado: 2h)
 
+* Herramientas de internet
+   - Navegadores 
 * Protocolos de comunicacion
     - Definicion de protocolo
     - Concepto de direccion IP 
