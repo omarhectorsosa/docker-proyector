@@ -2,14 +2,14 @@ version: "3"
 
 services:
   web: 
-    image: proyector:v6
+    image: proyector:v7
     build:
       context: .
       dockerfile: Dockerfile
     environment:
       APP_ENV: dev
     volumes:
-      - ./build/:/var/www/
+      - ./:/var/www/
     ports:
       - 3000:80  
     networks:

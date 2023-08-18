@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="">
+    <h1>{{ controller_accion }}</h1>
+    <ul>
+      {% for producto in productos %}
+        <li>Nombre: {{ producto.name }}</li>
+        <li>Precio: {{ producto.price }}</li>
+        <li>Descripcion: {{ producto.description}}</li>
+        <li>Estado: {{ producto.state.name}}</li>
+        <li>Id: {{ producto.id }}</li>
+        <hr>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

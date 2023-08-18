@@ -1,0 +1,57 @@
+{% extends 'backoffice_layout.html.twig' %}
+
+{% block content %}
+<section class="section dashboard">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="x_content">
+          <div class="row mb-2">
+            <div class="col-md-8">
+              <a href="{{ path('app_product_new') }}" class="btn btn-success">	{{ "backoffice.global.button_new"|trans }}</a>
+            </div>  
+          </div>  
+        </div>
+      
+        <div class="x_content">
+            <div class="row">
+              <table id="example" class="display table table-striped table-bordered dataminetables">
+                <thead>
+                  <th><input type="checkbox" id="select_all" name="select_all"></th>
+                  <th>{{ "backoffice.product.name"|trans }}</th>
+                  <th>{{ "backoffice.product.description"|trans }}</th>
+                  <th>{{ "backoffice.product.price"|trans }}</th>
+                  <th>{{ "backoffice.product.state"|trans }}</th>
+                  <th>{{ "backoffice.product.modifier"|trans }}</th>
+                  <th>{{ "backoffice.product.delete"|trans }}</th>
+                  
+                </thead>
+                <tbody>
+                  {% for producto in productos %}
+                    <tr>
+                      <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ producto.id }}"></td>
+                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.name }}</a></td>
+                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.description }}</a></td>
+                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.price }}</a></td>
+                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.state.name }}</a></td>
+                      <td>
+                        <a class="btn btn-primary" href="{{ path('app_product_edit', {'id': producto.id}) }}">
+                          <i class="bi bi-pencil-square"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="{{ path('app_product_delete', {'id': producto.id}) }}" class="btn btn-danger disable-btn del-link" type="submit">
+                          <i class="bi bi-x-square"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}

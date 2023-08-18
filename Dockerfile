@@ -23,7 +23,7 @@ ARG composer_version
 RUN wget https://getcomposer.org/download/${composer_version}/composer.phar \
     && mv composer.phar /usr/bin/composer && chmod +x /usr/bin/composer
 
-COPY build/ /var/wwww/
+COPY . /var/wwww/
 WORKDIR /var/www/
 
 COPY entrypoint.sh /entrypoint.sh

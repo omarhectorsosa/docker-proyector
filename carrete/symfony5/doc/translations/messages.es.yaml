@@ -1,0 +1,85 @@
+backoffice:
+  global:
+    welcome: Bienvenido
+    you_are_logged: Estas logueado
+    change_my_password: Cambio contraseña.
+    logout: Logout
+    error: Error
+    success: Exitoso
+    an_unexpected_error: Hubo un erro inesperado.
+    must_not_be_empty: Must not be empty
+    please_confirm: Por favor confirme su accion?
+    choice_action: Seleccione una accion
+    no_item_selected: item sin seleccionar
+    button_new: Nuevo
+    go: Ir
+  menu:
+    home: Inicio
+    user: Usuario
+    manage: Administrador
+    categories: Categorias
+    blog: Blog
+    history: Historial
+  role:
+    choice_role: Cambio rol
+  user:
+    listing: Usuarios.
+    user_listing: Lista de usuarios
+    group_actions: Grupo de acccion
+    deactivate: Desactivado
+    Activate: Activado
+    delete: Borrar
+    username: Usuario
+    email: Correo
+    name: Nombre completo
+    modifier: Edit
+    status: Estado
+    password: Contraseña
+    cancel: Cancelar
+    register: Registro
+    changer_password: Cambiar constraseña
+    changer_my_password: Change my password
+    current_password: Current password
+    new_password: Nuevo password
+    confirm_password: Confirm password
+    remember_password: Recuerda tu contraña
+    new_passwod_must_be: La contraseña deberia renovarse.
+    changed_password: Cambio contraseña
+    add_user: Agregar usuario.
+    modify_user: Modified user
+  product:
+    listing: Productos.
+    product_listing: Lista de productos
+    group_actions: Grupo de acccion
+    deactivate: Desactivado
+    Activate: Activado
+    delete: Borrar
+    name: Nombre completo
+    modifier: Editar
+    cancel: Cancelar
+    add_product: Agregar producto
+    modify_product: Modificar producto
+    price: Precio
+    description: Descripción
+    id: identificador
+    state: Estado
+    modify_success: El producto fue modificao exitosamente.
+    image: Carga las imagenes al producto.
+  image:
+    name: Nombre
+    delete: Eliminar 
+  login:
+    new_site: Nuevo sitio
+    create_acount: Crear tu cuenta
+    all_rights: Reservado todos los derechos.
+    already_member: Olvidaste tu contraseña?
+    log_in: Autentica tu cuenta
+    log_in_instruction: Ingresa tu email & password 
+    log_in_password: Contraseña
+    log_pass_check: Por favor ingresa tu contraseña
+    login_in_username: Email
+    log_check: Por favor ingrese tu usuario
+    login_user_now: Estas con 
+  logout: 
+    sign_out: Salir
+

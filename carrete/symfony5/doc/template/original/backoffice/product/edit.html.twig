@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+<h1>{{ controller_accion }}</h1>
+<h2>{{ mensaje }}</h2>
+    <form action="{{ path('app_product_edit',  {'id': producto.id}) }}" method="POST">
+        <label for="pname">Nombre:</label><br>
+        <input type="text" id="pname" name="pname" value="{{ producto.name }}"><br>
+        <label for="lname">Descripción:</label><br>
+        <input type="text" id="pdescription" name="pdescription" value="{{ producto.description }}"><br>
+        <label for="pprice">Precio:</label><br>
+        <input type="text" id="pprice" name="pprice" value="{{ producto.price }}"><br><br>
+        <input type="submit" name="submit" value="Submit">
+        <input type="text" id="pstate" name="pstate" value="{{ producto.state.id }}"><br><br>
+        <input type="submit" name="submit" value="Submit">
+    </form> 
+</div>
+{% endblock %}
