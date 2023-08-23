@@ -288,6 +288,17 @@ Internet maneja concepto como dirección IP y DNS (Sistema de Nomenclatura de Do
 .center[<iframe width="560" height="315" src="https://www.youtube.com/embed/rw41W8crZ_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]
 
 ---
+## Dominio
+
+### Registro
+
+Para poder registrar el dominio desde la pagina [Nic AR](https://nic.ar/es/ayuda/instructivos/registro-de-dominio) 
+
+.pull-center[
+   ![:scale 100%](./img/nicar.png)
+]
+
+---
 
 ## Infraestructura
 
@@ -449,7 +460,7 @@ El modelo cliente-servidor, también conocido como “principio cliente-servidor
    ![:scale 40%](./img/internet2-image12.webp)
 ]
 
-Un servidor acepta las peticiones del cliente
+Desde su creación, la web fue pensada para funcionar con un cliente y un servidor. El servidor entrega el sitio web a los clientes que lo solicitan. Los clientes son los navegadores web que consumen y muestran ese sitio web.
 
 ---
 ## Herramientas de internet
@@ -567,41 +578,82 @@ conjunto limitado de programas clientes, pueda comunicarse con cualquiera de ell
 * **Nuevos servicios** Podcasting, Webquest, Youtube, Scribd, Slideshare, y otros. 
 
 ---
+## Correo: 
+### Tipos
 
-## Seguridad en las redes
+   * Web Mail
+   * POP3   
+   * SMTP
 
-### Porque navegar en un sitio seguro con https
+Diferencia entre SMTP Y Webmail.
 
-.center[<iframe width="560" height="315" src="https://www.youtube.com/embed/tHhFQaurGAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]
+
+
+---   
+## Outlook
+### Uso y configuracion de cuenta.
+
+1. Abre Microsoft Outlook 2019
+1. Elige IMAP/POP
+
+.pull-center[
+   ![:scale 100%](./img/outlook1.png)
+]
+
+1. Configura las opciones IMAP o POP
+
+.pull-center[
+   ![:scale 100%](./img/outlook2.png)
+]
+
+1. Finaliza la configuración
+
+---   
+## Outlook
+### Reglas
+
+.pull-center[
+   ![:scale 100%](./img/outlook4.png)
+]
+
 
 ---
 
-### Definicion de virus y tipo de virus
+## Firma Digital
+### Concepto
 
-.pull-left[
-* .texto-mediano[Un virus informático es un programa (software) que puede infectar a otros programas, modificándose de tal manera que causen daño como borrar archivos o afectar el rendimiento y seguridad de las computadoras.]
-* .texto-mediano[Pueden dispersarse a través de copias o replicas]
-]
+Es el conjunto de caracteres que se añaden al final de un documento o cuerpo de un mensaje para
+informar, dar fe o mostrar validez y seguridad.
 
-.pull-right[
-.center[<iframe width="560" height="315" src="https://www.youtube.com/embed/ZHfNaCuVzkg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]
+La firma digital se la utiliza para hacer trámites con entidades públicas, declaraciones impositivas y
+notificaciones judiciales, operaciones bancarias, contratos a distancia, y comercio exterior, historias
+clínicas, identificación y autenticación en sistemas informáticos. 
+
+---
+## Firma Digital
+### Criptografia simetrica
+Solo utiliza una clave para cifrar y descifrar. Ésta debe ser previamente conocida por todas las partes
+involucradas. 
+
+.pull-center[
+   ![:scale 100%](./img/internet2-firma1.png)
 ]
 
 ---
+## Firma Digital
+### Clave publica y clave privada
 
-## Seguridad en las redes
+---
+## Certificacion digital.
+### Concepto general
 
+---
+## Certificacion digital.
+### Firma digitalizada
 
-### Definicion de antirus virus y consejos para una navegacion segura
-
-* Los antivirus son programas que tienen por finalidad detectar y destruir los virus que puedan afectar
-al Sistema Operativo de un equipo.
-* Algunos de los antivirus que existen en el mercado son: Norton, Symantec, McAfee, Grisoft, Panda,
-Avast, AVG, Nod32, etc.
-
-.pull-denter[
-.center[<iframe width="560" height="315" src="https://www.youtube.com/embed/gOgHPSphMPE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]
-]
+---
+## Certificacion digital.
+### Seguridad en las redes
 
 ---
 class: center, middle, inverse
