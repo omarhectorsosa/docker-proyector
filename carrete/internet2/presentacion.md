@@ -579,41 +579,56 @@ conjunto limitado de programas clientes, pueda comunicarse con cualquiera de ell
 
 ---
 ## Correo: 
-### Tipos
+### Tipos de correo
 
-   * Web Mail
-   * POP3   
-   * SMTP
+   * Web Mail: Un webmail es un programa informático, concretamente un cliente de correo electrónico
+   * POP3: Protocolo de red de acceso a mensajes electrónicos almacenados en un servidor.    
+   * SMTP: Protocolo de transferencia de correo  simple
 
-Diferencia entre SMTP Y Webmail.
+La diferencia fundamental entre POP3 y el correo-web (webmail) es que el primero gestiona los emails
+mediante un programa instalado en el ordenador y el segundo a través de una página web. Con una cuenta
+de correo POP, el usuario descarga sus mensajes al PC, gracias a programas como Outlook, Eudora o
+Thunderbird. 
 
+Existen empresas privadas que dan servicio de Webmail, por ejemplo:
 
+   * Gmail
+   * Yahoo
+   * Hotmail (actualmente Outlook)
+   * AOL 
 
----   
+---
+
+## Correo: 
+
+### Jerarquias
+
+* Para: (destinatarios principales)
+* CC: (destinatarios secundarios en copia)
+* CCo: (destinatarios secundarios con copia oculta) 
+
+---
+
 ## Outlook
 ### Uso y configuracion de cuenta.
 
+.pull-left[
 1. Abre Microsoft Outlook 2019
 1. Elige IMAP/POP
-
-.pull-center[
-   ![:scale 100%](./img/outlook1.png)
-]
-
 1. Configura las opciones IMAP o POP
 
-.pull-center[
-   ![:scale 100%](./img/outlook2.png)
+]
+.pull-right[
+   ![:scale 90%](./img/outlook2.png)
 ]
 
-1. Finaliza la configuración
+---
 
----   
 ## Outlook
-### Reglas
+### Reglas desde el WebMail
 
 .pull-center[
-   ![:scale 100%](./img/outlook4.png)
+   ![:scale 90%](./img/outlook4.png)
 ]
 
 
@@ -636,16 +651,31 @@ Solo utiliza una clave para cifrar y descifrar. Ésta debe ser previamente conoc
 involucradas. 
 
 .pull-center[
-   ![:scale 100%](./img/internet2-firma1.png)
+   ![:scale 70%](./img/simetrica.png)
 ]
 
 ---
 ## Firma Digital
 ### Clave publica y clave privada
 
+Esta metodología tiene como base la utilización de dos claves diferentes, pero vinculadas
+matemáticamente entre sí, utilizadas para cifrar y descifrar el mensaje
+
+.pull-center[
+   ![:scale 70%](./img/publica.png)
+]
+
 ---
 ## Certificacion digital.
 ### Concepto general
+
+Se trata del “conjunto de datos en forma electrónica, consignados junto a otros o asociados con
+ellos, que pueden ser utilizados como medios de identificación del firmante”,
+
+.pull-center[
+   ![:scale 70%](./img/firma-digital.png)
+]
+
 
 ---
 ## Certificacion digital.
