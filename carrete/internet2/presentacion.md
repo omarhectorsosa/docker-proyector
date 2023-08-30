@@ -582,13 +582,16 @@ conjunto limitado de programas clientes, pueda comunicarse con cualquiera de ell
 ### Tipos de correo
 
    * Web Mail: Un webmail es un programa informático, concretamente un cliente de correo electrónico
-   * POP3: Protocolo de red de acceso a mensajes electrónicos almacenados en un servidor.    
-   * SMTP: Protocolo de transferencia de correo  simple
+   * POP3 e IMAP: Protocolo de red de acceso a mensajes electrónicos almacenados en un servidor.   
+   * IMAP: Lo mismo que el POP3 pero la ventaja que nos permite  acceder a varios clientes.
+   * SMTP: Protocolo de transferencia de correo  simple, utlizado para enviar correos a un servidor.
 
 La diferencia fundamental entre POP3 y el correo-web (webmail) es que el primero gestiona los emails
 mediante un programa instalado en el ordenador y el segundo a través de una página web. Con una cuenta
 de correo POP, el usuario descarga sus mensajes al PC, gracias a programas como Outlook, Eudora o
-Thunderbird. 
+Thunderbird.
+
+La diferencia entres POP3 e IMAP, es que POP3 elimina los mensaje del servidor al descargarlo, tambien IMAP nos permite acceder a varios clientes.
 
 Existen empresas privadas que dan servicio de Webmail, por ejemplo:
 
@@ -598,14 +601,44 @@ Existen empresas privadas que dan servicio de Webmail, por ejemplo:
    * AOL 
 
 ---
-
 ## Correo: 
+### Configración inicial
 
-### Jerarquias
+Para poder crear una cuenta en el cliente se debe acceder a seccion "Crear cuenta"
 
-* Para: (destinatarios principales)
-* CC: (destinatarios secundarios en copia)
-* CCo: (destinatarios secundarios con copia oculta) 
+.pull-center[
+   ![:scale 50%](./img/thun-conf.png)
+]
+
+---
+## Correo: 
+### Entrada: Configuracion de correo en Thunderbird
+
+Cuando se configura un cliente (web mail) se debe tener en cuenta las siguiente informacion sobre el servidor de entrada.
+
+* Nombre de servidor y Puerto
+* Usuario
+* Seguridad de conexion y tipo de autenticación
+
+Este es la configuracion tipica
+
+.pull-center[
+   ![:scale 50%](./img/thun-conf1.png)
+]
+
+---
+## Correo: 
+### Salida: Configuracion de correo en Thunderbird
+
+Cuando se configura un cliente (web mail) se debe tener en cuenta las siguiente informacion sobre el servidor de salida SMTP.
+
+* Nombre de servidor y Puerto
+* Seguridad de conexion y tipo de autenticación
+* Usuario y contraseña
+
+.pull-center[  
+   ![:scale 50%](./img/thun-conf2.png)
+]
 
 ---
 
@@ -634,56 +667,28 @@ Existen empresas privadas que dan servicio de Webmail, por ejemplo:
 
 ---
 
+## Correo: 
+
+### Confección y redacción
+
+En el momento que generamos el correo debemos definir los siguientes valores. 
+
+* Para: (destinatarios principales)
+* CC: (destinatarios secundarios en copia)
+* CCo: (destinatarios secundarios con copia oculta) 
+
+Tener en cuenta que la comunicacion por correo se define como carecter formal y la comunicacion debe ser la mas clara y acertiva posible.
+
+---
+
 ## Firma Digital
 ### Concepto
 
 Es el conjunto de caracteres que se añaden al final de un documento o cuerpo de un mensaje para
 informar, dar fe o mostrar validez y seguridad.
 
-La firma digital se la utiliza para hacer trámites con entidades públicas, declaraciones impositivas y
-notificaciones judiciales, operaciones bancarias, contratos a distancia, y comercio exterior, historias
-clínicas, identificación y autenticación en sistemas informáticos. 
+.center[<iframe width="560" height="315" src="https://www.youtube.com/embed/b-yDMVqklXQ?si=O3lU9R0teIprbuQB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>]
 
----
-## Firma Digital
-### Criptografia simetrica
-Solo utiliza una clave para cifrar y descifrar. Ésta debe ser previamente conocida por todas las partes
-involucradas. 
-
-.pull-center[
-   ![:scale 70%](./img/simetrica.png)
-]
-
----
-## Firma Digital
-### Clave publica y clave privada
-
-Esta metodología tiene como base la utilización de dos claves diferentes, pero vinculadas
-matemáticamente entre sí, utilizadas para cifrar y descifrar el mensaje
-
-.pull-center[
-   ![:scale 70%](./img/publica.png)
-]
-
----
-## Certificacion digital.
-### Concepto general
-
-Se trata del “conjunto de datos en forma electrónica, consignados junto a otros o asociados con
-ellos, que pueden ser utilizados como medios de identificación del firmante”,
-
-.pull-center[
-   ![:scale 70%](./img/firma-digital.png)
-]
-
-
----
-## Certificacion digital.
-### Firma digitalizada
-
----
-## Certificacion digital.
-### Seguridad en las redes
 
 ---
 class: center, middle, inverse
