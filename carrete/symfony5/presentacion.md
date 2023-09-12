@@ -388,53 +388,48 @@ Desde la url onfigurada puedo acceder a `http://127.0.0.1/hola/mundo`
 ---
 
 # Inicio del proyecto
-## Genero el IndexController y index.html.twig manualmente
 
-Agrego el controler `src/controller/IndexController.php` 
+## Construyo el controllador para el home del `Backoffice` y `Frontoffice`
+
+Agrego el controler `src/controller/backoffice/IndexController.php` 
 
 ```php
+namespace App\Controller\Backoffice;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
 class IndexController extends AbstractController {
     /**
-     * @Route("/", name="app_index")
+     * @Route("/backoffice", name="app_backoffice_index")
      */
     public function index(): Response
     {
-        return $this->render('index.html.twig', [
+        return $this->render('backoffice/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);
     }
 }
 ```
 
+Utilizar el `namespace` para ubicar el controlador en otro nivel de carpeta.
+
 ---
 
 # Inicio del proyecto
 
-## Genero el IndexController y index.html.twig manualmente
+## Construyo el template del home del backoffice y frontoffice
 
-Agrego el template `template/index.html.twig`
+Agrego el template `template/backoffice/index.html.twig`
 
-```markdown
-{% extends 'base.html.twig' %}
-{% block title %}Hello HolaMundoController!{% endblock %}
+```php
+{% extends 'backoffice_layout.html.twig' %}
+{% block title %} Backoffice! {% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/ososa/Documentos/personal/git/github.proyectos/symfony/perfumeria/src/Controller/HolaMundoController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/ososa/Documentos/personal/git/github.proyectos/symfony/perfumeria/templates/hola_mundo/index.html.twig'|file_link(0) }}">templates/index.html.twig</a></code></li>
-    </ul>
-</div>
+//.. 
 {% endblock %}
 
 ```
-
 
 ---
 # Creando un proyecto a partir de un modelo de negocio
@@ -1280,20 +1275,26 @@ public function show($id): Response
 
 # Boostrap
 
-## Agregar motor boostrap
+## Agregar motor boostrap para el backoffice
 
-Enviar al `public` el paquete template boostrap `Nice Admin` que con contiene los estilos (css), javascript(js) e imagenes (img) descargado. 
+Para poder integrar el framework de boostrap debemos seguir los siguientes pasos:
+
+1.  Crear la carpeta `backoffice` en `public`  
+1. Descargar un framework a gusto 
+    1. [Web Nice Admin](https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/) 
+    1. [Files Nice Admin](./doc/boostrap/backoffice.zip)
+1. Copiar el nucleo del framework (css, js y vendor) 
 
 Cabe destacar que para la iconografia se utiliza [Bootstrap Icons](https://icons.getbootstrap.com/)
-
-
 
 ---
 
 # Boostrap
-## Adapto el IndexController y el Index.html.twig del backoffice
 
-Actualizar el template `template/backoffice/index.html.twig` con el `backoffice_layout.html.twig`un div con `class="container-fluid"` clase propia del boostrap.
+## Comenzando la prueba con el HOME `/backoffice` 
+
+1. Copio todo el layout [Layout del Backoffice](./doc/template/plantillas/layout/backoffice/backoffice.zip) en la carpeta template.
+1. Actualizar el  index del backoffice.
 
 ```markdown
 {% extends "backoffice_layout.html.twig" %}
@@ -1306,9 +1307,13 @@ Actualizar el template `template/backoffice/index.html.twig` con el `backoffice_
 ---
 
 # Boostrap
+
 ## Copio los template de los Productos
 
-Copio sobre la carpeta `product` los `list.html.twig`, `show.html.twig` , `delete.html.twig` y `edit.html.twig`, `new.html.twig` que son los template completos en boostrap para adaptarse a lo ya generado.
+Cuando verifiquemos que todo el `Framework del Boostrap`  este correctamente configurado vamos a colocar los restantes templates para el ABM de producto y estado. 
+
+1. Copio los templates [Product](./doc/template/plantillas/backoffice/product/product.zip) en `templates/product`
+1. Copio los templates [State](./doc/template/plantillas/backoffice/state/state.zip) en `templates/state`
 
 ---
 
@@ -1326,6 +1331,39 @@ Antes de hacer eso, ya que tenemos el controlador ProductController agrego en el
     </a>
 </li><!-- End Dashboard Nav -->
 ```
+---
+
+# Boostrap
+
+## Agregar motor boostrap para el frontoffice
+
+Para poder integrar el framework de boostrap debemos seguir los siguientes pasos:
+
+1. Crear la carpeta `frontoffice` en `public`  
+1. Descargar un framework a gusto 
+    1. [](https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/) 
+    1. [Files ](./doc/boostrap/frontoffice.zip)
+1. Copiar el nucleo del framework (css, js y vendor) 
+
+Cabe destacar que para la iconografia se utiliza [Bootstrap Icons](https://icons.getbootstrap.com/)
+
+
+---
+
+# Boostrap
+
+## Comenzando la prueba con el HOME `/frontoffice` 
+
+1. Copio todo el layout [Layout del Frontoffice](./doc/template/plantillas/layout/frontoffice/frontoffice.zip) en la carpeta template.
+1. Actualizar el  index del frontoffice.
+
+```markdown
+{% extends "frontoffice_layout.html.twig" %}
+    {% block  content %}
+    //..
+{% endblock %}
+```
+
 ---
 # Translations
 

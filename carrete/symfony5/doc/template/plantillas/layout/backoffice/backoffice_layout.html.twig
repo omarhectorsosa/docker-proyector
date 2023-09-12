@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{%include "backoffice_head.html.twig" %}
+
+<body>
+
+    {%include "backoffice_header.html.twig" %}
+
+    {% include "backoffice_sidebar.html.twig" %}
+   
+    <main id="main" class="main">
+        {% include "backoffice_title.html.twig" %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success ml-10" style="margin-left:20px; margin-right:20px">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger ml-10" style="margin-left:20px; margin-right:20px">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <section class="section dashboard">
+            {% block content%}{%endblock%}
+        </section>
+        
+    </main><!-- End #main -->
+
+    {% include "backoffice_footer.html.twig" %}
+
+    {%include "backoffice_javascript.html.twig" %}
+
+</body>
+</html>
