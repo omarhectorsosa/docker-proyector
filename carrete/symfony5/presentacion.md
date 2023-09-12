@@ -140,6 +140,12 @@ $ mv /Users/weaverryan/.symfony/bin/symfony /usr/local/bin/symfony
 $ symfony consola [comando] [opciones]
 ```
 
+---
+
+# Symfony
+
+## Consola Symfony
+
 Esta herramienta es solo sugerencia, por otro lado puede utilizar la herramienta que otorga smfony 
 
 * Desde el propio proyecto tenemos la carpeta bin donde se puede acceder a los comando con la siguietne sintaxis
@@ -699,7 +705,7 @@ $ symfony console make:entity Sales
 
 ## Crear los archivos para la migracion y crear las entidades en la base de datos.
 
-``` 
+```yaml
 $ symfony console make:migration
 $ symfony console doctrine:migrations:migrate
 ```
@@ -727,10 +733,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
-        // $manager->persist($product);
-
-        $manager->flush();
+        //...
     }
 }
 ```
@@ -775,8 +778,8 @@ php bin/console doctrine:fixtures:load --append
 ## Agrego  una entidad extra `Image` y modifico la entidad actual `Product`
 
 ```markdown
-symfony console make:entity Image
-symfony console make:entity Product
+$ symfony console make:entity Image
+$ symfony console make:entity Product
 ```
 
 A la entidad Image la creo con un campo `name`y al `Product` agrego una relación OneToMany a `Image`.
@@ -792,24 +795,21 @@ $ symfony console doctrine:migrations:migrate
 # Creación de loas Entity (BD), Controller, Template y Repository
 
 ### Repository `Product`
-Los metodos que se agregan en el repositorio son add, remove y otros.
-```markdow
-public function findOneById($id): ?Product
-{
-    return $this->createQueryBuilder('p')
-        ->andWhere('p.id = :val')
-        ->setParameter('val', $id)
-        ->getQuery()
-        ->getOneOrNullResult()
-    ;
-}
-public function getAllProductsWithImages(){
-    return $this->createQueryBuilder('p')
-        ->select('p','i')
-        ->innerJoin('p.image','i')
-        ->getQuery()
-        ->getResult(); 
-}
+
+Los metodos que se agregan en el repositorio son add, remove y otros manualmente como el `findOneById` como los demas metodos que se encuentran por extension pod `findAll`
+
+```php
+    //...
+    public function findById($id): ?Product
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    //..
 ```
 ---
 
@@ -824,7 +824,6 @@ symfony console make:controller Product
 
 created: src/Controller/ProductController.php
 created: templates/product/index.html.twig
-
 ```
 
 ---
@@ -857,113 +856,312 @@ namespace App\Controller\Backoffice\
 
 ### Controller `Product`: Metodo new()
 
+Debo crear el metodo `new` teniendo en cuenta los siguientes concepto.
+
+* Incluir las `Entity`, en este caso las entidades `Product` y `State`
+* En principio diseñamos la ruta y el nombre de la ruta (para uso interno del código)
+* Y finalmente creo una funcion `public` como respuesta un objeto `Response` 
+
 ```markdow
 use App\Entity\Product;
 use App\Entity\State;
+
 **
-* @Route("/product/new", name="app_product_new")
+* @Route("/backoffice/product/new", name="app_bacjkoffice_product_new")
 */
-public function new(): Response {
-       if(isset($_POST['submit'])){
-           $producto= new Product();
-           $repository=$this->getDoctrine()->getRepository(Product::class);
-           $repository_state=$this->getDoctrine()->getRepository(State::class);
-           $estado = $repository_state->findById($_POST['pstate']); 
-           $producto->setName($_POST['pname']);
-           $producto->setDescription($_POST['pdescription']);
-           $producto->setPrice($_POST['pprice']);
-           $producto->setState($estado);
-           $repository->add($producto);
-           return $this->redirectToRoute("app_backoffice_index");
-        }
-        return $this->render('backoffice/product/new.html.twig', [
-            'controller_name' => 'Nuevo producto.',
-        ]);
+
+public function new(): Response {   
+       [.....]
 }
+
+```
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Metodo new()
+
+Para continuar debemos tener en cuenta que nuestro metodo va llamarse en dos ocasiones, cuando se presenta el formulario y cuando recibo la informacion luego de haber echo el `submit`. 
+```php
+//...
+public function new(): Response {
+    $repository_state=$this->getDoctrine()->getRepository(State::class);
+    $states=$repository_state->findAll();
+    if(isset($_POST['submit'])){
+        //...
+    }
+    return $this->render('backoffice/product/new.html.twig', [
+                'controller_accion' => 'New.',
+                'states'=>$states
+    ]);
+}
+```
+Donde el bloque dentro del IF procesara lo enviado. Por fuera del IF es el flujo para presentar el formulario.
+
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Metodo new()
+
+Queda decidir que se debe hacer para registrar el producto. Para ello se debe hacer las siguientes acciones: 
+
+1. Obenter ambos `Repository` de `Product` y `State`
+1. Obtener un objeto `State` en base al codigo recibido
+1. Instanciar `Product`
+
+```php
+    //....
+    if(isset($_POST['submit'])){
+        $repository_product=$this->getDoctrine()->getRepository(Product::class);  
+        $state = $repository_state->findById($_POST['pstate']);
+        //....
+    }
+    //....
+```
+
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Metodo new()
+
+1. Instanciar `Product`
+1. Seteo los valores del producto (name,description,price y state)
+1. Agrego el producto con el metodo `add` del propio `Repository` de producto
+1. Retorno a una pagina puntual con el alias de la ruta
+
+```php
+    //....
+    if(isset($_POST['submit'])){
+        //.....
+        $product->setName($_POST['pname']);
+        $product->setDescription($_POST['pdescription']);
+        $product->setPrice($_POST['pprice']);
+        $product->setState($state);
+        $repository_product->add($product);
+        return $this->redirectToRoute("app_backoffice_product_index");
+    }
+    //...
 ```
 
 ---
 # Creación de loas Entity (BD), Controller, Template y Repository
 
-### Template `New Product`: 
+### Template `New Product`:  Base
+
+Un template con extension `.twig`  se creara en la carpeta template dentro del directorio correspondiente con la siguientes caracteristicas: 
 
 ```html
 {% extends 'base.html.twig' %}
 {% block title %}Hello ProductController!{% endblock %}
 {% block body %}
+    //...
+{% endblock %}
+```
+
+El template debe contener `{% extends %}` para incluir el template base y `{% block %}{% endblock %}` donde se formara el propio `HTML`
+
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Template `New Product`: Cuerpo Html
+
+```html
+//...
 <div class="example-wrapper">
-<h1>{{ controller_accion }}</h1>
-<h2>{{ mensaje }}</h2>
-    <form action="{{ path('app_product_new') }}" method="POST">
+    <h1>{{ controller_accion }}</h1>
+    <form action="{{ path('app_backoffice_product_new') }}" method="POST">
         <label for="pname">Nombre:</label><br>
         <input type="text" id="pname" name="pname" value="shampoo"><br>
         <label for="lname">Descripción:</label><br>
         <input type="text" id="pdescription" name="pdescription" value="Shampoo comun"><br>
         <label for="pprice">Precio:</label><br>
         <input type="text" id="pprice" name="pprice" value="1345.89"><br><br>
+        <select name="pstate"><option value=""></option></select>
         <input type="submit" name="submit" value="Submit">
-    </form> 
+    </form>    
 </div>
-{% endblock %}
+//...
+```
+
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Template `New Product`: Completo el SELECT
+
+```html
+//...
+<div class="example-wrapper">
+<h1>{{ controller_accion }}</h1>
+    <form action="{{ path('app_backoffice_product_new') }}" method="POST">
+        //...
+        <select name="pstate">
+            {% for state in states %}
+                <option value="{{state.id}}">{{state.name}}</option>
+            {% endfor%}
+        </select>
+        //...
+    </form>    
+</div>
+//...
+```
+
+---
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Metodo edit()
+
+```php
+/**
+* @Route("/backoffice/product/edit/{id}", name="app_backoffice_product_edit")
+*/
+public function edit($id): Response
+{       
+    $repository_product = $this->getDoctrine()->getRepository(Product::class);
+    $repository_state = $this->getDoctrine()->getRepository(State::class);
+    $product = $repository_product->findById($id);
+    if(isset($_POST['submit'])){
+        //...
+    }
+    $state= $product->getState();
+    $states=$repository_state->findAll();
+    return $this->render('backoffice/product/edit.html.twig', [
+            'product'=>$product,
+            'product_state'=>$state->getId(),
+            'states'=>$states
+    ]);
+}
+```
+---
+# Creación de loas Entity (BD), Controller, Template y Repository
+### Template ` Edit Product`: Estructura del formulario (sin en el estado)
+
+```html
+//...
+<form action="{{ path('app_backoffice_product_edit',  {'id': product.id}) }}" method="POST">
+    <label for="pname">Nombre:</label><br>
+    <input type="text" id="pname" name="pname" value="{{ product.name }}"><br>
+    <label for="lname">Descripción:</label><br>
+    <input type="text" id="pdescription" name="pdescription" value="{{ product.description }}"><br>
+    <label for="pprice">Precio:</label><br>
+    <input type="text" id="pprice" name="pprice" value="{{ product.price }}"><br><br>
+    <input type="submit" name="submit" value="Submit">
+</form> 
+//..
+```
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+### Template ` Edit Product`: Estructura del formulario (con el estado)
+
+```html
+//...
+<form action="{{ path('app_backoffice_product_edit',  {'id': producto.id}) }}" method="POST">
+    //...
+    <select name="pstate">
+        {% for state in states %}
+            <option value="{{state.id}}">{{state.name}}</option>
+        {% endfor%}
+    </select><br><br>
+    //...
+</form> 
+//...
+```
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+### Template ` Edit Product`: Estructura del formulario (con el estado seleccionado)
+
+```html
+//...
+<form action="{{ path('app_backoffice_product_edit',  {'id': producto.id}) }}" method="POST">
+    //...
+     <select name="pstate">
+            {% for state in states %}
+                {% if state.id == product_state  %}
+                    <option selected="true" value="{{state.id}} ">{{state.name}}</option>
+                {% else %}
+                    <option value="{{state.id}} ">{{state.name}}</option>    
+                {% endif %}    
+            {% endfor%}
+        </select><br><br>
+    //...
+</form> 
+//...
+```
+
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Submit del metodo edit() 
+
+```php
+public function edit($id): Response
+{          
+    //...
+    if(isset($_POST['submit'])){ 
+        $state = $repository_state->findById($_POST['pstate']); 
+        $product->setName($_POST['pname']);
+        $product->setDescription($_POST['pdescription']);
+        $product->setPrice($_POST['pprice']);
+        $product->setState($state);
+        $repository_product->add($product);
+        return $this->redirectToRoute("app_backoffice_index");
+    } 
+    //...    
+}
 ```
 ---
 
 # Creación de loas Entity (BD), Controller, Template y Repository
 
-### Controller `Product`: Metodo edit()
+### Controller `Product`: Submit del metodo edit() en la misma pagina.
+
+```php
+public function edit($id): Response
+{          
+    //...
+    if(isset($_POST['submit'])){ 
+        /..
+        return $this->redirectToRoute("app_backoffice_product_edit" , array(
+                'id' => $id,
+        ));
+    } 
+    //...    
+}
+```
+---
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Metodo delete()
+
+
 ```php
 /**
-* @Route("/backoffice/product/edit/{id}", name="app_product_edit")
+* @Route("/backoffice/product/delete/{id}", name="app_backoffice_product_delete")
 */
-public function edit($id): Response
-{       
-    $repository = $this->getDoctrine()->getRepository(Product::class);
-    $producto   = $repository->findById($id);
-    if(isset($_POST['submit'])){
-        $repository_state=$this->getDoctrine()->getRepository(State::class);
-        $estado = $repository_state->findById($_POST['pstate']); 
-        $producto->setName($_POST['pname']);
-        $producto->setDescription($_POST['pdescription']);
-        $producto->setPrice($_POST['pprice']);
-        $producto->setState($estado);
-        $repository->add($producto);
-        return $this->redirectToRoute("app_backoffice_index");
-    }
-    return $this->render('backoffice/product/edit.html.twig', [
-        'controller_name' => 'Nuevo producto.',
-        'producto'=>$producto
+public function delete($id): Response
+{
+    $repository_product = $this->getDoctrine()->getRepository(Product::class);
+    $product = $repository_product->findById($id);     
+    $message    = '';    
+    //...
+    return $this->render('backoffice/product/delete.html.twig', [
+        'messege'=>$message 
     ]);
 }
 ```
 ---
 
 # Creación de loas Entity (BD), Controller, Template y Repository
-### Template ` Edit Product`
 
-```html
-{% extends 'base.html.twig' %}
-{% block title %}Hello ProductController!{% endblock %}
-{% block body %}
-<div class="example-wrapper">
-<h1>{{ controller_accion }}</h1>
-<h2>{{ mensaje }}</h2>
-    <form action="{{ path('app_product_edit',  {'id': producto.id}) }}" method="POST">
-        <label for="pname">Nombre:</label><br>
-        <input type="text" id="pname" name="pname" value="{{ producto.name }}"><br>
-        <label for="lname">Descripción:</label><br>
-        <input type="text" id="pdescription" name="pdescription" value="{{ producto.description }}"><br>
-        <label for="pprice">Precio:</label><br>
-        <input type="text" id="pprice" name="pprice" value="{{ producto.price }}"><br><br>
-        <input type="submit" name="submit" value="Submit">
-    </form> 
-</div>
-{% endblock %}
-```
----
+### Controller `Product`: Metodo delete() 
 
-# Creación de loas Entity (BD), Controller, Template y Repository
-
-### Controller `Product`: Metodo delete()
+Para eliminar un registro se debe utilizar el metodo `remove()` del propio repositorio.
 
 ```php
 /**
@@ -971,19 +1169,33 @@ public function edit($id): Response
 */
 public function delete($id): Response
 {
-    $repository = $this->getDoctrine()->getRepository(Product::class);
-    $producto = $repository->findById($id);     
-    if($producto){
-        $repository->remove($producto);
-        return $this->redirectToRoute("app_backoffice_index");
+    //...
+   if($product){
+        if(!$repository_product->remove($product))
+            $message = "El producto se elimino correctamente.";
+        else
+            $message = "El producto no se pudo eliminar."; 
     } else {
-        $mensaje = "El producto no existe";
+        $message = "El producto no existe";
     }
-    return $this->render('backoffice/product/delete.html.twig', [
-        'controller_name' => 'Eliminar producto',
-        'mensaje'=>isset($mensaje)?$mensaje:"" 
-    ]);
+   //...
 }
+```
+
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Template delete() 
+
+```html
+{% extends 'base.html.twig' %}
+{% block title %}{% endblock %}
+{% block body %}
+    <div class="example-wrapper">
+        {{ messege }}
+    </div>
+{% endblock %}
 ```
 
 ---
@@ -992,17 +1204,15 @@ public function delete($id): Response
 
 ### Controller `Product`: Metodo list()
 
-```markdow
-use App\Entity\Product;
+```php
 /**
-* @Route("/product/list", name="app_product_list")
+* @Route("/backoffice/product/list", name="app_backoffice_product_list")
 */
 public function list(){
-    $repository = $this->getDoctrine()->getRepository(Product::class);
-    $productos = $repository->findAll();
-    return $this->render('product/list.html.twig', [
-        'controller_accion' => 'Listar Productos',
-        'productos'=>$productos
+    $repository_product = $this->getDoctrine()->getRepository(Product::class);
+    $products = $repository->findAll();
+    return $this->render('backoffice/product/list.html.twig', [
+        'productos'=>$products
     ]);
 }
 ```
@@ -1011,8 +1221,7 @@ public function list(){
 
 ### Template ` List Product`
 
-```html
-<h1>Hello {{ controller_name }}! ✅</h1>
+```php
 <table>
 <thead><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Estado</th></thead>
 <tbody>   
@@ -1031,17 +1240,21 @@ public function list(){
 
 ### Controller `Product`: Metodo show()
 
-```markdow
+```php
 **
-* @Route("/backoffice/product/show/{id}", name="app_backoffice_show")
+* @Route("/backoffice/product/show/{id}", name="app_backoffice_produc_show")
 */
 public function show($id): Response
 {
-    $repository = $this->getDoctrine()->getRepository(Product::class);
-    $producto = $repository->findById($id);
+    $repository_product = $this->getDoctrine()->getRepository(Product::class);
+    $product = $repository_product->findById($id);
+    $message = '';
+    if(!$product){   
+        $message = "El producto no existe";
+    }
     return $this->render('backoffice/product/show.html.twig', [
-    	'controller_name' => 'Ver producto',
-    	'producto'=>$producto
+        'producto'=>$product, 
+        'message'=> $message
     ]);
 }
 ```
@@ -1051,17 +1264,22 @@ public function show($id): Response
 ### Template ` Show Product`
 
 ```html
-<div class="example-wrapper">
-    <h1>{{ controller_name }}! ✅</h1>
-    <label>Nombre: {{producto.name}}</label><br>         
-    <label>Descripcion: {{producto.description}}</label><br>  
-    <label>Precio: {{producto.price}}</label><br>   
-    <label>Estado: {{producto.state.id}}</label><br>  
-</div>
+//..
+{{ message }}
+{% if producto %}
+    <div class="example-wrapper">
+        <label>Nombre: {{producto.name}}</label><br>         
+        <label>Descripcion: {{producto.description}}</label><br>  
+        <label>Precio: {{producto.price}}</label><br>   
+        <label>Estado: {{producto.state.id}}</label><br>  
+    </div>
+{% endif %}
+//...
 ```
 ---
 
 # Boostrap
+
 ## Agregar motor boostrap
 
 Enviar al `public` el paquete template boostrap `Nice Admin` que con contiene los estilos (css), javascript(js) e imagenes (img) descargado. 
