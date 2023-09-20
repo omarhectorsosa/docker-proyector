@@ -4,12 +4,16 @@
 {%include "backoffice_head.html.twig" %}
 
 <body>
-
-    {%include "backoffice_header.html.twig" %}
-
-    {% include "backoffice_sidebar.html.twig" %}
    
+    {%include "backoffice_header.html.twig" %}
+    {% include "backoffice_sidebar.html.twig" %}
+
     <main id="main" class="main">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> 
+        {% endfor %}
         {% include "backoffice_title.html.twig" %}
         {% for message in app.flashes('success') %}
             <div class="alert alert-success ml-10" style="margin-left:20px; margin-right:20px">

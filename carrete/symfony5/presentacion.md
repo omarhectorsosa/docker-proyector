@@ -38,12 +38,21 @@ class: animated fadeInUp
    - Creacion de los controladores y template
    - Creacion de las estructura de tablas 
    - Listar, Agregar, Eliminar y Modificar Producto
+   - Incluir mensaje en la vista
+
+---
+## Agenda
+* Fremework Boostrap
+    - Armar el HOME del Frontoffice y Backoffice
+    - Armar vista ABM backoffice de las entidades `Product` 
+* Translation
+    - Definicion de transalation
+    - Configuración de translation
+
 
 ---
 ## Agenda
 
-* Estructura de un backoffice y frontoffice
-* Boostrap al proyecto
 * Formularios : Creación
   - Creacion Entidad y Formulario
   - Renderizar Formulario
@@ -52,8 +61,13 @@ class: animated fadeInUp
 * Modulo `Security`
 * Login Form
 
+---
+## Agenda
 
-
+* Manejo de servicio.
+    - ¿Que es un servicio en Symfony?.
+    - Configuración de servicio
+    - Subir una imagen con el servicio `upload`
 
 ---
 
@@ -849,6 +863,70 @@ namespace App\Controller\Backoffice\
 
 # Creación de loas Entity (BD), Controller, Template y Repository
 
+### Controller `Product`: Metodo list()
+
+Debo crear el metodo `new` teniendo en cuenta los siguientes concepto.
+
+* Incluir las `Entity`, en este caso las entidades `Product` y `State`
+* En principio diseñamos la ruta y el nombre de la ruta (para uso interno del código)
+* Y finalmente creo una funcion `public` como respuesta un objeto `Response` 
+
+```markdow
+use App\Entity\Product;
+use App\Entity\State;
+
+**
+* @Route("/backoffice/product/list", name="app_bacjkoffice_product_list")
+*/
+
+public function list(): Response {   
+       [.....]
+}
+
+```
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Controller `Product`: Metodo list()
+
+```php
+/**
+* @Route("/backoffice/product/list", name="app_backoffice_product_list")
+*/
+public function list(){
+    $repository_product = $this->getDoctrine()->getRepository(Product::class);
+    $products = $repository->findAll();
+    return $this->render('backoffice/product/list.html.twig', [
+        'controller_name' => 'List',
+        'productos'=>$products
+    ]);
+}
+```
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Template ` List Product`
+
+```php
+<table>
+<thead><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Estado</th></thead>
+<tbody>   
+    {% for producto in productos %}
+        <tr>
+        <td>{{ producto.name}}</td>
+        <td>{{ producto.description}}</td>
+        <td>{{ producto.price}}</td>
+        <td>{{ producto.state.name}}</td>
+        <td>
+    {% endfor %}
+</tbody>
+```
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
 ### Controller `Product`: Metodo new()
 
 Debo crear el metodo `new` teniendo en cuenta los siguientes concepto.
@@ -870,6 +948,7 @@ public function new(): Response {
 }
 
 ```
+
 ---
 
 # Creación de loas Entity (BD), Controller, Template y Repository
@@ -886,7 +965,7 @@ public function new(): Response {
         //...
     }
     return $this->render('backoffice/product/new.html.twig', [
-                'controller_accion' => 'New.',
+                'controller_name' => 'New.',
                 'states'=>$states
     ]);
 }
@@ -935,7 +1014,7 @@ Queda decidir que se debe hacer para registrar el producto. Para ello se debe ha
         $product->setPrice($_POST['pprice']);
         $product->setState($state);
         $repository_product->add($product);
-        return $this->redirectToRoute("app_backoffice_product_index");
+        return $this->redirectToRoute("app_backoffice_product_list");
     }
     //...
 ```
@@ -1024,6 +1103,7 @@ public function edit($id): Response
     $state= $product->getState();
     $states=$repository_state->findAll();
     return $this->render('backoffice/product/edit.html.twig', [
+            'controller_name' => 'Edit',
             'product'=>$product,
             'product_state'=>$state->getId(),
             'states'=>$states
@@ -1197,42 +1277,6 @@ public function delete($id): Response
 
 # Creación de loas Entity (BD), Controller, Template y Repository
 
-### Controller `Product`: Metodo list()
-
-```php
-/**
-* @Route("/backoffice/product/list", name="app_backoffice_product_list")
-*/
-public function list(){
-    $repository_product = $this->getDoctrine()->getRepository(Product::class);
-    $products = $repository->findAll();
-    return $this->render('backoffice/product/list.html.twig', [
-        'productos'=>$products
-    ]);
-}
-```
----
-# Creación de loas Entity (BD), Controller, Template y Repository
-
-### Template ` List Product`
-
-```php
-<table>
-<thead><th>Nombre</th><th>Descripcion</th><th>Precio</th><th>Estado</th></thead>
-<tbody>   
-    {% for producto in productos %}
-        <tr>
-        <td>{{ producto.name}}</td>
-        <td>{{ producto.description}}</td>
-        <td>{{ producto.price}}</td>
-        <td>{{ producto.state.id}}</td>
-        <td>
-    {% endfor %}
-</tbody>
-```
----
-# Creación de loas Entity (BD), Controller, Template y Repository
-
 ### Controller `Product`: Metodo show()
 
 ```php
@@ -1248,6 +1292,7 @@ public function show($id): Response
         $message = "El producto no existe";
     }
     return $this->render('backoffice/product/show.html.twig', [
+        'controller_name' => 'Show',
         'producto'=>$product, 
         'message'=> $message
     ]);
@@ -1271,6 +1316,51 @@ public function show($id): Response
 {% endif %}
 //...
 ```
+---
+
+## Mensaje en la vista
+
+### Usar agregar al Layout el template
+
+Accedemos al `base.html.twig` e insertamos el boton alert de exito. 
+
+```html
+<!DOCTYPE html>
+<html>
+    //...
+    <body>
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div> 
+        //...
+    </body>
+</html>
+```
+---
+## Mensaje en la vista
+
+### Agregar el mensaje en la edicion.
+
+```php
+public function edit($id): Response
+{          
+    //...
+    if(isset($_POST['submit'])){ 
+        //..
+        $this->addFlash(
+            'success',
+            'Se guardo correctamente el producto'
+        );
+        return $this->redirectToRoute("app_backoffice_product_list");
+    } 
+    //...    
+}
+```
+
+Se puede enviar mensaje del tipo `success`, `notice`, `ìnfo` o `warning` y configurarlo a su modo.
+
+
 ---
 
 # Boostrap
@@ -1341,11 +1431,9 @@ Para poder integrar el framework de boostrap debemos seguir los siguientes pasos
 
 1. Crear la carpeta `frontoffice` en `public`  
 1. Descargar un framework a gusto 
-    1. [](https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/) 
-    1. [Files ](./doc/boostrap/frontoffice.zip)
+    1. [Farm Website Template](https://htmltemplates.co/free-website-templates/farmfresh-free-organic-food-website-template) 
+    1. [Farm Website Files](./doc/boostrap/frontoffice.zip)
 1. Copiar el nucleo del framework (css, js y vendor) 
-
-Cabe destacar que para la iconografia se utiliza [Bootstrap Icons](https://icons.getbootstrap.com/)
 
 
 ---
@@ -1365,7 +1453,23 @@ Cabe destacar que para la iconografia se utiliza [Bootstrap Icons](https://icons
 ```
 
 ---
+
+# Boostrap
+
+## Comenzando la prueba con el HOME `/frontoffice` 
+
+## Copio los template de los Productos
+
+Cuando verifiquemos que todo el `Framework del Boostrap`  este correctamente configurado vamos a colocar los restantes templates para el ABM de producto y estado. 
+
+1. Copio los templates [Home](./doc/template/plantillas/frontoffice/frontoffice.zip) en `templates/frontoffice`
+
+---
 # Translations
+
+Las `traducciones` se utiliza para unificar los terminos en diferente idiomas en base a una configuracion para eso se realiza las siguientes tareas.  
+
+1. Configura el tranlations
 
 Configurar el idioma por defecto `config/package/translations.yaml`
 
@@ -1377,10 +1481,10 @@ framework:
         fallbacks:
             - es
 ```
+1. Configurar los terminos en `translations`, copiar los documentos [Transaltions](./doc/translations/translations.zip)
+1. Copio todo las tranlations correpondiente utilzados en los template agregar `tranlations/messages.es.yaml`
 
 ---
-
-Copio todo las tranlations correpondiente utilzados en los template agregar `tranlations/messages.es.yaml`
 
 # Formularios
 
@@ -1398,8 +1502,10 @@ Para crear un buen sistema de formulario debemos tener en cuenta los diferentes 
 ---
 
 # Formularios
+
 ## Entidad
 Sabiendo el nombre de la entidad crearemos el formulario `ProductType`
+
 ```markdown
 $ symfony console make:form Product
 
@@ -1429,11 +1535,7 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 // ...
 ```
 
-
-
 ---
-
-
 
 # Formularios
 
@@ -1599,7 +1701,7 @@ public function new(Request $request): Response {
 
 ```php
 /**
-* @Route("/product/edit/{id}", name="app_product_edit")
+* @Route("/backoffice/product/edit/{id}", name="app_backoffice_product_edit")
 */
 public function edit($id, Request $request): Response
 {
@@ -1861,7 +1963,6 @@ public function onKernelException(ExceptionEvent $event): void {
 }
 // ...
 ```
-
 
 ---
 

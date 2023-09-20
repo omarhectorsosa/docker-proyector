@@ -3,48 +3,52 @@
 {% block content %}
 <section class="section">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-                <div class="form_errors">{{ form_errors(form) }}</div>
-                {{ form_start(form, {'attr': { 'class': 'product'} }) }}
+              <h5 class="card-title">General Form Elements</h5>
+
+              <!-- General Form Elements -->
+              <form action="{{ path('app_backoffice_product_new') }}" method="POST">
                 <div class="row mb-3">
-                    <div class="col-sm-10">
+                  <label for="inputText" class="col-sm-2 col-form-label">{{ "backoffice.product.name"|trans }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" id="pname" name="pname" value=""><br>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputEmail" class="col-sm-2 col-form-label">{{ "backoffice.product.description"|trans }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" id="pdescription" name="pdescription" value=""><br>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">{{ "backoffice.product.price"|trans }}</label>
+                  <div class="col-sm-10">
+                      <input type="text" id="pprice" name="pprice" value=""><br><br>
+                  </div>
+                </div>
+               <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label">{{ "backoffice.product.state"|trans }}</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" name='pstate' aria-label="Default select example">
+                    {% for state in states %}
+                        <option value="{{state.id}} ">{{state.name}}</option>
+                    {% endfor%}  
+                    </select>
+                  </div>
+                </div>
 
-                        <div class="form-floating mb-3 mt-3">
-                            {{ form_widget(form.name) }}
-                            <label for="floatingName">{{ "backoffice.product.name"|trans }}</label>
-                        </div> 
-                        
-                        <div class="form-floating mb-3 mt-3">
-                            {{ form_widget(form.description) }}
-                            <label for="floatingDescription">{{ "backoffice.product.description"|trans }}</label>
-                        </div> 
-
-                        <div class="form-floating mb-3 mt-3">
-                            {{ form_widget(form.price) }}
-                            <label for="floatingPrice">{{ "backoffice.product.price"|trans }}</label>
-                        </div> 
-
-                        <div class="form-floating mb-3 mt-3">
-                            {{ form_widget(form.state) }}
-                            <label for="floatingPrice">{{ "backoffice.product.state"|trans }}</label>
-                        </div> 
-
-                        <div class="row mb-3">
-                            <div class="col-sm-3">
-                                {{ form_widget(form.save) }}
-                            </div>
-                            <div class="col-sm-5">
-                                <a href="{{ path('app_product_list') }}" class="btn btn-success">Cancel</a>
-                            </div>
-                        </div>
-
-                    </div> 
-                </div>          
-                {{ form_end(form) }}
+                <div class="row mb-3 ">
+                  <div class="col-sm-5">
+                    <a href="{{ path('app_backoffice_product_list') }}" class="btn btn-primary">Volver</a>
+                    <button type="submit" name="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </div>
+              </form><!-- End General Form Elements -->
             </div>
+          </div>
         </div>
-    </div>
+      </div>
 </section>
 {% endblock %}

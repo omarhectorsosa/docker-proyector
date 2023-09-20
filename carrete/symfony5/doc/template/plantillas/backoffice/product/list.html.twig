@@ -8,7 +8,7 @@
         <div class="x_content">
           <div class="row mb-2">
             <div class="col-md-8">
-              <a href="{{ path('app_product_new') }}" class="btn btn-success">	{{ "backoffice.global.button_new"|trans }}</a>
+              <a href="{{ path('app_backoffice_product_new') }}" class="btn btn-success">	{{ "backoffice.global.button_new"|trans }}</a>
             </div>  
           </div>  
         </div>
@@ -30,17 +30,17 @@
                   {% for producto in productos %}
                     <tr>
                       <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ producto.id }}"></td>
-                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.name }}</a></td>
-                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.description }}</a></td>
-                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.price }}</a></td>
-                      <td><a href="{{ path('app_product_show', {'id': producto.id}) }}">{{ producto.state.name }}</a></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.name }}</a></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.description }}</a></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.price }}</a></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.state.name }}</a></td>
                       <td>
-                        <a class="btn btn-primary" href="{{ path('app_product_edit', {'id': producto.id}) }}">
+                        <a class="btn btn-primary" href="{{ path('app_backoffice_product_edit', {'id': producto.id}) }}">
                           <i class="bi bi-pencil-square"></i>
                         </a>
                       </td>
                       <td>
-                        <a href="{{ path('app_product_delete', {'id': producto.id}) }}" class="btn btn-danger disable-btn del-link" type="submit">
+                        <a href="{{ path('app_backoffice_product_delete', {'id': producto.id}) }}" class="btn btn-danger disable-btn del-link" type="submit">
                           <i class="bi bi-x-square"></i>
                         </a>
                       </td>
