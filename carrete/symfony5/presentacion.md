@@ -73,6 +73,7 @@ class: animated fadeInUp
 * Modulo `Security`
     - Login Form
     - Customizar Login
+    - Manejar permisos.
 
 ---
 
