@@ -53,21 +53,26 @@ class: animated fadeInUp
 ---
 ## Agenda
 
-* Formularios : Creación
-  - Creacion Entidad y Formulario
-  - Renderizar Formulario
-  - Completar acciones (Listado, Alta, Edicion y Borrado)  
-* Manejo de Excepciones
-* Modulo `Security`
-* Login Form
+* Manejo de servicio.
+    - ¿Que es un servicio en Symfony?.
+    - Configuración de servicio
+    - Crear la entidad Imagen
+    - Subir una imagen con el servicio `upload`
 
 ---
 ## Agenda
 
-* Manejo de servicio.
-    - ¿Que es un servicio en Symfony?.
-    - Configuración de servicio
-    - Subir una imagen con el servicio `upload`
+* Formularios : Creación
+  - Creacion Entidad y Formulario
+  - Renderizar Formulario
+  - Completar acciones (Listado, Alta, Edicion y Borrado)  
+
+* Manejo de Excepciones
+    - Concepto de excepciones
+    - Configuracion
+* Modulo `Security`
+    - Login Form
+    - Customizar Login
 
 ---
 
