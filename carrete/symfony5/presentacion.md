@@ -180,7 +180,7 @@ Pueden acceder a toda la información  con el siguiente comando  `php bin/consol
 
 # Inicio proyecto
 
-## Bajando proyecto desde Github
+## Desde Github
 
 Ingreso al sition [symfony/website-skeleton](https://github.com/symfony/website-skeleton)
 
@@ -203,27 +203,20 @@ Loading composer repositories with package information
 
 # Inicio proyecto
 
-## Usando la consola con  `new project` o `composer`
+## Desde `composer`
+Para instalar el composer se debe ejecutar los siguientes comandos
 
-Se podria crear desde un proyecto minimo con los componentes esenciales hasta un proyecto avanzado con funcionalidades pre-establecidas. 
-
-* Desde el comando `Symfony`  un proyecto base 
-
-```markdow
-symfony new my_project_name
-symfony new my_project_name --version=5.1 --full
-symfony new --version=5.1 --full --dir=/var/www/html
+```bash
+$ sudo apt-get install composer
 ```
 
-* Desde el composer se puede generar un proyecto basico (sin motor de plantilla) a un website (sugerido):
+Desde el composer se puede generar un proyecto basico (sin motor de plantilla) a un website (sugerido):
 
-```markdow
+```bash
 composer create-project symfony/skeleton my_project_name
 composer create-project symfony/website-skeleton my_project_name
 composer create-project symfony/website-skeleton my_project_name 5.1.*
 ```
-
-Documentación oficial [Syfmony](https://symfony.com/doc/current/index.html)
 
 ---
 # Inicio de proyecto
@@ -297,7 +290,7 @@ Apr 25 17:31:48 |DEBUG| PHP    started
 ---
 # Inicio de proyecto
 
-## Visulizar aplicacion
+## Visualizar aplicacion
 
 Y vamos al navegar para ubicar nuestro sitio y su presentacion:
 
@@ -580,17 +573,19 @@ created: src/Repository/StateRepository.php
 
 Creo el migration
 
-```
-symfony console make:migration
- Next: Review the new migration "migrations/Version20230516002936.php"
- Then: Run the migration with php bin/console doctrine:migrations:migrate
+```bash
+$ symfony console make:migration
+
+    Next: Review the new migration "migrations/Version20230516002936.php"
+    Then: Run the migration with php bin/console doctrine:migrations:migrate
 ```
 Creo la tabla
 
-```yaml
-symfony console doctrine:migrations:migrate
-[notice] Migrating up to DoctrineMigrations\Version20230516002936
-[notice] finished in 42.8ms, used 18M memory, 1 migrations executed, 1 sql queries
+```bash
+$symfony console doctrine:migrations:migrate
+
+    [notice] Migrating up to DoctrineMigrations\Version20230516002936
+    [notice] finished in 42.8ms, used 18M memory, 1 migrations executed, 1 sql queries
 ```
 ---
 
