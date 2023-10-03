@@ -783,30 +783,12 @@ php bin/console doctrine:fixtures:load --append
 
 ---
 
-# Creando un proyecto a partir de un modelo de negocio
-
-## Agrego  una entidad extra `Image` y modifico la entidad actual `Product`
-
-```markdown
-$ symfony console make:entity Image
-$ symfony console make:entity Product
-```
-
-A la entidad Image la creo con un campo `name`y al `Product` agrego una relación OneToMany a `Image`.
-
-Genero las migrations y tablas en db
-
-```markdown
-$ symfony console make:migration
-$ symfony console doctrine:migrations:migrate
-```
----
-
 # Creación de loas Entity (BD), Controller, Template y Repository
 
 ### Repository `Product`
 
-Los metodos que se agregan en el repositorio son add, remove y otros manualmente como el `findOneById` como los demas metodos que se encuentran por extension pod `findAll`
+Los metodos que se agregan en el repositorio son `add` y `remove`.  
+Manualmente vamos a ingresar el `findOneById` para que se pueda resolver por un objeto y no un array por defecto.
 
 ```php
     //...
@@ -821,6 +803,29 @@ Los metodos que se agregan en el repositorio son add, remove y otros manualmente
     }
     //..
 ```
+
+---
+
+# Creación de loas Entity (BD), Controller, Template y Repository
+
+### Repository `State`
+
+Actualizar el `findById` del `State`
+
+```php
+    //...
+    public function findById($id): ?State
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.id = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    //..
+```
+
 ---
 
 # Creación de loas Entity (BD), Controller, Template y Repository
@@ -866,7 +871,7 @@ namespace App\Controller\Backoffice\
 
 ### Controller `Product`: Metodo list()
 
-Debo crear el metodo `new` teniendo en cuenta los siguientes concepto.
+En `ProductController.php` debo crear el metodo `list` teniendo en cuenta los siguientes concepto.
 
 * Incluir las `Entity`, en este caso las entidades `Product` y `State`
 * En principio diseñamos la ruta y el nombre de la ruta (para uso interno del código)
@@ -897,7 +902,7 @@ public function list(): Response {
 */
 public function list(){
     $repository_product = $this->getDoctrine()->getRepository(Product::class);
-    $products = $repository->findAll();
+    $products = $repository_product->findAll();
     return $this->render('backoffice/product/list.html.twig', [
         'controller_name' => 'List',
         'productos'=>$products
@@ -1010,6 +1015,7 @@ Queda decidir que se debe hacer para registrar el producto. Para ello se debe ha
     //....
     if(isset($_POST['submit'])){
         //.....
+        $product = new Product();
         $product->setName($_POST['pname']);
         $product->setDescription($_POST['pdescription']);
         $product->setPrice($_POST['pprice']);
@@ -1019,6 +1025,7 @@ Queda decidir que se debe hacer para registrar el producto. Para ello se debe ha
     }
     //...
 ```
+
 
 ---
 # Creación de loas Entity (BD), Controller, Template y Repository
@@ -1046,7 +1053,7 @@ El template debe contener `{% extends %}` para incluir el template base y `{% bl
 ```html
 //...
 <div class="example-wrapper">
-    <h1>{{ controller_accion }}</h1>
+    <h1>{{ controller_name }}</h1>
     <form action="{{ path('app_backoffice_product_new') }}" method="POST">
         <label for="pname">Nombre:</label><br>
         <input type="text" id="pname" name="pname" value="shampoo"><br>
@@ -1333,8 +1340,9 @@ Accedemos al `base.html.twig` e insertamos el boton alert de exito.
         {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
-        </div> 
-        //...
+        </div>  
+        {% endfor %}
+    //...
     </body>
 </html>
 ```
@@ -1372,10 +1380,12 @@ Para poder integrar el framework de boostrap debemos seguir los siguientes pasos
 
 1.  Crear la carpeta `backoffice` en `public`  
 1. Descargar un framework a gusto 
-    1. [Web Nice Admin](https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/) 
-    1. [Files Nice Admin](./doc/boostrap/backoffice.zip)
+    1. [Web Nice Admin](https://bootstrapmade.com/demo/NiceAdmin/) 
+    1. [Web AdminLTE](https://adminlte.io/themes/v3/)
 1. Copiar el nucleo del framework (css, js y vendor) 
 
+En este caso elegimos el `Nice Admin`.  [File Nice Admin](./doc/boostrap/backoffice.zip) y lo copio en `public/backoffice`
+ 
 Cabe destacar que para la iconografia se utiliza [Bootstrap Icons](https://icons.getbootstrap.com/)
 
 ---
@@ -1384,8 +1394,10 @@ Cabe destacar que para la iconografia se utiliza [Bootstrap Icons](https://icons
 
 ## Comenzando la prueba con el HOME `/backoffice` 
 
+En base al `framewwork` elegido armamos el layout 
+
 1. Copio todo el layout [Layout del Backoffice](./doc/template/plantillas/layout/backoffice/backoffice.zip) en la carpeta template.
-1. Actualizar el  index del backoffice.
+1. Actualizo el archivo `template/backoffice/index.html.twig` 
 
 ```markdown
 {% extends "backoffice_layout.html.twig" %}
@@ -1395,11 +1407,12 @@ Cabe destacar que para la iconografia se utiliza [Bootstrap Icons](https://icons
     </div>
 {% endblock %}
 ```
+
 ---
 
 # Boostrap
 
-## Copio los template de los Productos
+## Copio los template de los Productos y Estados.
 
 Cuando verifiquemos que todo el `Framework del Boostrap`  este correctamente configurado vamos a colocar los restantes templates para el ABM de producto y estado. 
 
@@ -1422,6 +1435,27 @@ Antes de hacer eso, ya que tenemos el controlador ProductController agrego en el
     </a>
 </li><!-- End Dashboard Nav -->
 ```
+
+---
+# Translations
+
+Las `traducciones` se utiliza para unificar los terminos en diferente idiomas en base a una configuracion para eso se realiza las siguientes tareas.  
+
+1. Configura el tranlations
+
+Configurar el idioma por defecto `config/package/translations.yaml`
+
+```yaml
+framework:
+    default_locale: es
+    translator:
+        default_path: '%kernel.project_dir%/translations'
+        fallbacks:
+            - es
+```
+1. Configurar los terminos en `translations`, copiar los documentos [Transaltions](./doc/translations/translations.zip)
+1. Copio todo las tranlations correpondiente utilzados en los template agregar `tranlations/messages.es.yaml`
+
 ---
 
 # Boostrap
@@ -1435,7 +1469,6 @@ Para poder integrar el framework de boostrap debemos seguir los siguientes pasos
     1. [Farm Website Template](https://htmltemplates.co/free-website-templates/farmfresh-free-organic-food-website-template) 
     1. [Farm Website Files](./doc/boostrap/frontoffice.zip)
 1. Copiar el nucleo del framework (css, js y vendor) 
-
 
 ---
 
@@ -1466,24 +1499,93 @@ Cuando verifiquemos que todo el `Framework del Boostrap`  este correctamente con
 1. Copio los templates [Home](./doc/template/plantillas/frontoffice/frontoffice.zip) en `templates/frontoffice`
 
 ---
-# Translations
+# Manejo de servicios
 
-Las `traducciones` se utiliza para unificar los terminos en diferente idiomas en base a una configuracion para eso se realiza las siguientes tareas.  
+## Conceptos de servicio
 
-1. Configura el tranlations
+Los servicios funcionan de forma independiente al resto de la aplicación, a fin de cuentas, son clases independientes
 
-Configurar el idioma por defecto `config/package/translations.yaml`
+Los servicios se construyen en `src/Service/` y se definen en `config/services.yml`
 
-```yaml
-framework:
-    default_locale: es
-    translator:
-        default_path: '%kernel.project_dir%/translations'
-        fallbacks:
-            - es
+En este ejemplo vamos agregar `Imagenes` a los productos. 
+
+.pull-center[
+![image](./img/image-product.png)
+]
+
+---
+
+# Manejo de servicios
+
+## Agrego una entidad extra `Image` y modifico la entidad actual `Product`
+
+```markdown
+$ symfony console make:entity Image
 ```
-1. Configurar los terminos en `translations`, copiar los documentos [Transaltions](./doc/translations/translations.zip)
-1. Copio todo las tranlations correpondiente utilzados en los template agregar `tranlations/messages.es.yaml`
+
+A la entidad Image la creo con un campo `name`y agrego una relación ManyToOne a `Product`.
+
+Genero las migrations y tablas en db
+
+```markdown
+$ symfony console make:migration
+$ symfony console doctrine:migrations:migrate
+```
+
+---
+
+# Manejo de servicios
+
+## Agregar al template el campo 'FILE'
+
+```html
+<form action="#" method="post" enctype="multipart/form-data">
+//.....
+    <input type="file" id="pimage" name="pimage"/>
+//....
+</form>
+``` 
+
+----
+
+# Manejo de servicios
+
+## Proceso el submit 
+
+```php
+//..
+use App\Entity\Product;
+use App\Entity\Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+//...
+
+  if(isset($_POST['submit'])){
+    //...
+    $repository_image=$this->getDoctrine()->getRepository(Image::class);
+    $image = new Image();
+    $name = $_FILES['file']['name'];
+    $type = $_FILES['file']['type'];
+    $size = $_FILES['file']['size'];
+    $temp_name= $_FILES['file']['tmp_name']
+    //Guardar archivo
+    move_uploaded_file($temp_name,  $name);
+    $image->setName($name);
+    $repository_image->add($image);
+    $product->setImage($image);	
+    //...
+}
+
+//...
+```
+---
+
+
+# Manejo de servicios
+
+## Uploader Service
+
+[Uploader Service](https://symfony.com/doc/current/controller/upload_file.html#creating-an-uploader-service)
 
 ---
 
@@ -1594,8 +1696,6 @@ $builder
 # Formularios
 
 ## ProductType
-
-
 
 ```php
 // ... 
