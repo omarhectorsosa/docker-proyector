@@ -1470,42 +1470,12 @@ Para poder integrar el framework de boostrap debemos seguir los siguientes pasos
     1. [Farm Website Files](./doc/boostrap/frontoffice.zip)
 1. Copiar el nucleo del framework (css, js y vendor) 
 
----
-
-# Boostrap
-
-## Comenzando la prueba con el HOME `/frontoffice` 
-
-1. Copio todo el layout [Layout del Frontoffice](./doc/template/plantillas/layout/frontoffice/frontoffice.zip) en la carpeta template.
-1. Actualizar el  index del frontoffice.
-
-```markdown
-{% extends "frontoffice_layout.html.twig" %}
-    {% block  content %}
-    //..
-{% endblock %}
-```
 
 ---
 
-# Boostrap
+# Asignar y subir una imagen a un producto
 
-## Comenzando la prueba con el HOME `/frontoffice` 
-
-## Copio los template de los Productos
-
-Cuando verifiquemos que todo el `Framework del Boostrap`  este correctamente configurado vamos a colocar los restantes templates para el ABM de producto y estado. 
-
-1. Copio los templates [Home](./doc/template/plantillas/frontoffice/frontoffice.zip) en `templates/frontoffice`
-
----
-# Manejo de servicios
-
-## Conceptos de servicio
-
-Los servicios funcionan de forma independiente al resto de la aplicación, a fin de cuentas, son clases independientes
-
-Los servicios se construyen en `src/Service/` y se definen en `config/services.yml`
+## Modelo
 
 En este ejemplo vamos agregar `Imagenes` a los productos. 
 
@@ -1515,7 +1485,7 @@ En este ejemplo vamos agregar `Imagenes` a los productos.
 
 ---
 
-# Manejo de servicios
+# Asignar y subir una imagen a un producto
 
 ## Agrego una entidad extra `Image` y modifico la entidad actual `Product`
 
@@ -1534,7 +1504,7 @@ $ symfony console doctrine:migrations:migrate
 
 ---
 
-# Manejo de servicios
+# Asignar y subir una imagen a un producto
 
 ## Agregar al template el campo 'FILE'
 
@@ -1546,9 +1516,9 @@ $ symfony console doctrine:migrations:migrate
 </form>
 ``` 
 
-----
+---
 
-# Manejo de servicios
+# Asignar y subir una imagen a un producto
 
 ## Proceso el submit 
 
@@ -1578,8 +1548,46 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 //...
 ```
+
 ---
 
+# Boostrap
+
+## Comenzando la prueba con el HOME `/frontoffice` 
+
+1. Copio todo el layout [Layout del Frontoffice](./doc/template/plantillas/layout/frontoffice/frontoffice.zip) en la carpeta template.
+1. Actualizar el  index del frontoffice.
+
+```markdown
+{% extends "frontoffice_layout.html.twig" %}
+    {% block  content %}
+    //..
+{% endblock %}
+```
+
+---
+
+# Boostrap
+
+## Comenzando la prueba con el HOME `/frontoffice` 
+
+## Copio los template de los Productos
+
+Cuando verifiquemos que todo el `Framework del Boostrap`  este correctamente configurado vamos a colocar los restantes templates para el ABM de producto y estado. 
+
+1. Copio los templates [Home](./doc/template/plantillas/frontoffice/frontoffice.zip) en `templates/frontoffice`
+
+---
+
+# Manejo de servicios
+
+## Conceptos de servicio
+
+Los servicios funcionan de forma independiente al resto de la aplicación, a fin de cuentas, son clases independientes
+
+Los servicios se construyen en `src/Service/` y se definen en `config/services.yml`
+
+---
 
 # Manejo de servicios
 
