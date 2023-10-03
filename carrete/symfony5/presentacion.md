@@ -1458,21 +1458,6 @@ framework:
 
 ---
 
-# Boostrap
-
-## Agregar motor boostrap para el frontoffice
-
-Para poder integrar el framework de boostrap debemos seguir los siguientes pasos:
-
-1. Crear la carpeta `frontoffice` en `public`  
-1. Descargar un framework a gusto 
-    1. [Farm Website Template](https://htmltemplates.co/free-website-templates/farmfresh-free-organic-food-website-template) 
-    1. [Farm Website Files](./doc/boostrap/frontoffice.zip)
-1. Copiar el nucleo del framework (css, js y vendor) 
-
-
----
-
 # Asignar y subir una imagen a un producto
 
 ## Modelo
@@ -1548,6 +1533,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 //...
 ```
+---
+
+# Boostrap
+
+## Agregar motor boostrap para el frontoffice
+
+Para poder integrar el framework de boostrap debemos seguir los siguientes pasos:
+
+1. Crear la carpeta `frontoffice` en `public`  
+1. Descargar un framework a gusto 
+    1. [Farm Website Template](https://htmltemplates.co/free-website-templates/farmfresh-free-organic-food-website-template) 
+    1. [Farm Website Files](./doc/boostrap/frontoffice.zip)
+1. Copiar el nucleo del framework (css, js y vendor) 
 
 ---
 
