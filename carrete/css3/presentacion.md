@@ -150,7 +150,7 @@ El gráfico de la izquierda se crea con `<2_canvas>`. Muestra cuatro elementos: 
 
 
 - [Documentacion](https://www.w3schools.com/html/html5_2_canvas.asp)
-- [2_canva basico](http://127.0.0.1:2000/final/2_canva/2_canva_basico.html) 
+- [Canva Básico](http://127.0.0.1:2000/final/2_canva/canva_basico.html) 
 
 ---
 
@@ -528,7 +528,7 @@ van a posicionar `row`,`column`,`column-reverse`
    flex-direction: row;
 }
 ```
-[Flex Direction](http://127.0.0.1:2000/final/flexbox/flexbox_flex-direction.html)
+[Flex Direction](http://127.0.0.1:2000/final/6_flexbox/flexbox_flex-direction.html)
 ---
 
 ### Flexbox `flex-wrap`
@@ -540,7 +540,7 @@ La propiedad flex-wrap especifica si los elementos flexibles deben ajustarse o n
    flex-wrap: row;
 }
 ```
-[Flex Wrap](http://127.0.0.1:2000/final/flexbox/flexbox_flex-wrap.html)
+[Flex Wrap](http://127.0.0.1:2000/final/6_flexbox/flexbox_flex-wrap.html)
 ---
 
 ### Flexbox  `justify-content`
@@ -659,7 +659,7 @@ div:hover {
 <p><b>Nota:</b> Este ejemplo no trabaja en version 9 Internet Explore</p>
 ```
 - [Documentación](https://www.w3schools.com/cssref/css3_pr_transition.asp)
-- [Transición basica con hover](http://127.0.0.1:2000/final/transiciones/transition.html)
+- [Transición basica con hover](http://127.0.0.1:2000/final/7_transiciones/transition.html)
 ---
 
 ###  Propiedad de la transiciones
@@ -695,7 +695,7 @@ input[type=text]:focus {
 Search: <input type="text" name="search">
 ```
 
-[Transición basica con focus](http://127.0.0.1:2000/final/transiciones/transition_textbox.html)
+[Transición basica con focus](http://127.0.0.1:2000/final/7_transiciones/transition_textbox.html)
 
 ---
 
@@ -741,7 +741,7 @@ A diferencia de las transiciones, las animaciones, no dependen de los estados de
    	<h1 class="">Animacion</h1>
 </div>
 ```
-[Animacion circular](http://127.0.0.1:2000/final/animacion/animacion_ciclo.html)
+[Animacion circular](http://127.0.0.1:2000/final/8_animacion/animacion_ciclo.html)
 
 ---
 
@@ -790,7 +790,7 @@ div {
 <div></div>
 ```
 
-- [Animacion con avance gradual de cuadro](http://127.0.0.1:2000/final/animacion/animacion_avance_cuadro.html)
+- [Animacion con avance gradual de cuadro](http://127.0.0.1:2000/final/8_animacion/animacion_avance_cuadro.html)
 
 ---
 
