@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-11 mt-3">
                   <h1 class="title"><a href="../carrete/internet/index.html"> Internet I </a></h1>
-                  <h2 class="subtitle">Conceptos iniciales de internet xxxx</h2>
+                  <h2 class="subtitle">Conceptos iniciales de internet</h2>
                 </div>
               </div>
               <div class="row mt-2">
@@ -76,14 +76,14 @@
                 <div class="col-1 avatar">
                   <img src="./img/internet.jpg" class="rounded-circle" alt="patrick-icon" width="30" height="30">
                 </div>
-                <div class="col-11 mt-3">
-                  <h1 class="title">Patrick Abrams</h1>
-                  <h2 class="subtitle">Verified Graduate</h2>
+                <div class="col-10 mt-3">
+                  <h1 class="title"><a href="../carrete/css3/index.html"> CSS Y HTML </a></h1>
+                  <h2 class="subtitle1">CSS y HTML</h2>
                 </div>
               </div>
               <div class="row mt-2">
                 <p class="content-title">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sapiente labore sunt odio officiis, deleniti doloremque consequuntur, commodi aliquam voluptas eligendi cumque consequatur earum repellat, qui molestiae? Quam, facilis!
+                  Conceptos Básicos de HTML Y CSS
                 </p>
               </div>
             </div>
