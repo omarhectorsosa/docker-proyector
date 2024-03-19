@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-11 mt-3">
                   <h1 class="title"><a href="../carrete/internet/index.html"> Internet I </a></h1>
-                  <h2 class="subtitle">Conceptos iniciales de internet</h2>
+                  <h2 class="subtitle">Conceptos iniciales de internet xxxx</h2>
                 </div>
               </div>
               <div class="row mt-2">
