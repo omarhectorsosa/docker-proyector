@@ -152,12 +152,22 @@ class: animated fadeInUp
 
 La consola de symfony  nos simplifica  el uso de la herramienta con diferentes comandos disponibles para generar codigo, tablas y datos pruebas en forma rapida.
 
-* Descargando el tools   `Symfony`
-
 ```markdow
 $ curl -sS https://get.symfony.com/cli/installer | bash
+```
+Puede pasar que necesites exportar el comando para utilizar en diferente consola
+
+```markdow
+$ export PATH="$HOME/.symfony5/bin:$PATH"
+
+Or 
+
 $ mv /Users/weaverryan/.symfony/bin/symfony /usr/local/bin/symfony
-$ symfony consola [comando] [opciones]
+```
+Luego ejecutar comando para verificar su instalación
+
+```bash 
+$ symfony --v
 ```
 
 ---
