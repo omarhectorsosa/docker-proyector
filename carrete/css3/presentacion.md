@@ -127,15 +127,15 @@ Crea una página web que contenga un formulario con los siguientes campos de inf
 
 ---
 
-##  2_canva
+##  Canva
 
-El elemento HTML `<2_canvas>`se utiliza para dibujar gráficos en una página web.
+El elemento HTML `<canvas>`se utiliza para dibujar gráficos en una página web.
 
-El gráfico de la izquierda se crea con `<2_canvas>`. Muestra cuatro elementos: un rectángulo rojo, un rectángulo degradado, un rectángulo multicolor y un texto multicolor.
+El gráfico de la izquierda se crea con `<canvas>`. Muestra cuatro elementos: un rectángulo rojo, un rectángulo degradado, un rectángulo multicolor y un texto multicolor.
 
 ```html
-<2_canvas id="my2_canvas" width="200" height="100" style="border:1px solid #000000;">
-</2_canvas>
+<canvas id="my_canvas" width="200" height="100" style="border:1px solid #000000;">
+<canvas>
 ```
 
 ```javascript
@@ -149,7 +149,7 @@ El gráfico de la izquierda se crea con `<2_canvas>`. Muestra cuatro elementos: 
 ```
 
 
-- [Documentacion](https://www.w3schools.com/html/html5_2_canvas.asp)
+- [Documentacion](https://www.w3schools.com/graphics/canvas_intro.asp)
 - [Canva Básico](http://127.0.0.1:2000/final/2_canva/canva_basico.html) 
 
 ---
@@ -302,6 +302,8 @@ span:nth-child(2){
   <span>Span 3!</span>  
 </div>
 ```
+
+[Documentación](https://www.w3schools.com/cssref/sel_focus.php)
 
 ---
 
