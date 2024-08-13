@@ -184,31 +184,6 @@ Esta herramienta es solo sugerencia, por otro lado puede utilizar la herramienta
 
 Pueden acceder a toda la información  con el siguiente comando  `php bin/consola list`. Ver mas informacion en [Console Commands](https://symfony.com/doc/current/console.html)
 
-
-
----
-
-# Inicio proyecto
-
-## Desde Github
-
-Ingreso al sition [symfony/website-skeleton](https://github.com/symfony/website-skeleton)
-
-Clonamos el proyecto 
-
-```markdown
-git clone https://github.com/symfony/website-skeleton.git
-
-✔ symfony/website/website-skeleton [6.2|✔] 
-12:22 $ git checkout 5.1
-Rama '5.1' configurada para hacer seguimiento a la rama remota '5.1' de 'origin'.
-Cambiado a nueva rama '5.1'
-✔ ymfony/website/website-skeleton [5.1|✔] 
-12:22 $ composer install
-Loading composer repositories with package information
-....
-```
-
 ---
 
 # Inicio proyecto
@@ -231,17 +206,6 @@ composer create-project symfony/website-skeleton my_project_name 5.1.*
 ---
 # Inicio de proyecto
 
-## Caracteristicas del proyecto instalado y configuraciones iniciales
-
-Cabe destacar que por defecto se la descarga es sobre la ultima version de Symfony y pueden comprobarlo en el archivo `composer.json`: 
-
-```markdow
-"require": {
-        "php": "^7.2.5","
-    },
-```
----
-
 Configurar [.env](./doc/.env) con los ambientes y conección a base de datos.
 
 ```markdow
@@ -256,6 +220,56 @@ DATABASE_URL=mysql://root:password@localhost:3306/almacen
 MAILER_URL=smtp://mail.psasender.com.ar:587?username=senderauth@psasender.com.ar&password=92ADvi!YV8r
 ###< symfony/swiftmailer-bundle ###
 ```
+
+---
+
+# Inicio de proyecto
+
+## Algo de mysql 
+
+Se debe comprobar la comprobacion a una conexion de base de datos 
+
+```markdow 
+$ mysql -uroot -p 
+
+mysql> show databases;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.02 sec)
+
+```
+
+---
+
+# Inicio de proyecto
+
+## Creo la base de datos en base a la configuración
+
+Luego se debe ejecutar el siguiente comando 
+
+```markdow 
+$symfony console doctrine:database:create
+Created database `perfumeria` for connection named default
+```
+
+Finalizando, compruebo la base de datos creada
+
+```markdow 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| perfumeria         |
++--------------------+
+```
+
 ---
 
 # Inicio de proyecto
@@ -276,7 +290,7 @@ $ symfony server:stop
 
 # Inicio de proyecto
 
-## Correr aplicacion 
+## Correr aplicación 
 
 Luego de haber comprobado la insatalacion, debemos ubicarnos en el proyecto y correr el servidor
 
@@ -478,73 +492,6 @@ Se presenta el siguiente modelo de negocio para modelar desde la herramienta.
 .pull-center[
    ![:scale 80%](./img/doctrine_image_1.png)
 ]
-
----
-# Creando un proyecto a partir de un modelo de negocio
-
-## Algo de mysql 
-
-Se debe comprobar la comprobacion a una conexion de base de datos 
-
-```markdow 
-$ mysql -uroot -p 
-
-mysql> show databases;
-
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-4 rows in set (0.02 sec)
-
-```
-
----
-
-# Creando un proyecto a partir de un modelo de negocio
-
-## Configuro base de datos en symfony
-
-Se debe modificar le archivo `.env.local` o `.env` segun corresponda los siguientes campos: 
-
-```markdow 
-###> doctrine/doctrine-bundle ###
-# Formato descripto en https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url
-# Configura tu db driver y server_version en config/packages/doctrine.yaml
-# Remplaza las variables ${} segun tu configuracion
-DATABASE_URL=mysql://${db_user}:${db_pass}@${db_host}:${db_port}/${db_name}
-###< doctrine/doctrine-bundle ###
-```
-
----
-# Creando un proyecto a partir de un modelo de negocio
-
-## Creo la base de datos en base a la configuración
-
-Luego se debe ejecutar el siguiente comando 
-
-```markdow 
-$symfony console doctrine:database:create
-Created database `perfumeria` for connection named default
-```
-
-Finalizando, compruebo la base de datos creada
-
-```markdow 
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| perfumeria         |
-+--------------------+
-```
-
->   Libreria ORM
-    composer require symfony/orm-pack
 
 ---
 
