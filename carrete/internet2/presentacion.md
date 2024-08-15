@@ -80,17 +80,101 @@ class: animated fadeInUp
 .center[<iframe width="560" height="315" src="https://www.youtube.com/embed/mGG5o6vbKyQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]
 ---
 
-## Introducción
+## Introduccion 
 
-#### ¿Qué es Firewall de Windows?
+### ¿Qué es Firewall de Windows?
+
+.texto-grande[Proporciona al usuario un mayor control sobre los datos del equipo y
+aporta una línea de defensa contra personas o programas (incluidos los virus y gusanos) que intentan
+conectarse a un equipo sin haber sido invitados]
+.pull-center[
+   ![:scale 20%](./img/image-2.png)
+]
+
 ---
-## Introducción
+## Introduccion 
+
+### ¿Qué hace Firewall de Windows y qué no hace?
+
+| Firewall de Windows:                                         | Firewall de Windows NO:                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Ayuda a evitar que virus y gusanos informáticos lleguen a un equipo. | Detecta o deshabilita los virus y gusanos informáticos, si ya se encuentran en el equipo. |
+| Pide el permiso del usuario para bloquear o desbloquear ciertas solicitudes de conexión. | Impide que el usuario abra correo electrónico con archivos adjuntos peligrosos. |
+| Crea un registro de seguridad, si desea tener uno, que almacene los intentos correctos y fallidos de conectarse a un equipo. | Impide que el correo no deseado o spam aparezca en la bandeja de entrada. |
+|                                                              |                                                              |
+
+---
+## Introduccion 
 
 ### Virus y Antivirus
+
+.texto-grande[Un virus es un programa que se puede copiar a sí mismo e infectar diversos elementos de un equipo, como son los documentos, los programas y los componentes del sistema operativo. ]
+
+---
+## Introduccion 
+
+### Tipos de virus
+
+Un `malware` es código de programación malicioso que se pueden clasificar en los siguientes tipos: 
+
+* **Spyware**: Es un programa espía que recopila información de una computadora y después transmite esta información a una entidad externa sin el conocimiento o el consentimiento del propietario del computador
+* **Adware**: Es un tipo de programa publicitario malicioso.
+* **Ransomware**: Un ransomware, o "secuestro de datos" en español, es un tipo de programa malicioso que restringe el acceso a determinadas partes o archivos del sistema operativo infectado y pide un rescate a cambio
+de quitar esta restricción.
+
+---
+## Introduccion 
+
+### Tipos de virus
+
+Otros tipos de virus mas criticos son los siguientes:
+
+* **Gusano**: Un gusano es un programa que hace copias de sí mismo y se puede extender fuera del sistema operativo
+* **Caballo de troya**: Un caballo de Troya es un programa de apariencia legítima e inofensiva diseñado para hacerle creer al usuario que es algo conocido
+
+---
+## Introduccion 
+
+### Antivirus
+
+.texto-grande[ Los antivirus son programas que examinan los correo electrónico y otros archivos, en busca de virus, gusanos y caballos de Troya.
+]
+
+---
+## Introduccion 
+
+### Antivirus
+
+Algunos antivirus disponibles en el mercado son:
+
+* Panda
+* AVG
+* Norton Antivirus
+* Mc Affee
+* Avast
+* Nod32
+* Kaspersky
+* AppCheck Anti-Ransomware
+
 ---
 ## Introduccion 
 
 ### Validación, Activación y Chequeo de antivirus
+
+Desde el centro de seguridad de Windows podemos checkear nuestro antivirus
+.pull-center[
+   ![:scale 5%](image-3.png)
+]
+Desde el botón de Inicio, Panel de Control encontraremos a Centro de Seguridad de Windows:
+
+.pull-center[
+   ![:scale 20%](image-4.png)
+]   
+Este nos ayuda a configurar la seguridad de Windows (Firewall, Actualizaciones y Antivirus)
+.pull-center[
+   ![:scale 20%](image-5.png)
+]
+
 ---
 ## Redes
 
