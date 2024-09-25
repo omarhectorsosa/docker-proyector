@@ -223,7 +223,7 @@ datos, recursos y servicios.]
 
 ---
 
-## Redes
+
 
 ### Clasificación por tamaño
 
@@ -243,8 +243,6 @@ datos, recursos y servicios.]
 ]
 
 ---
-## Redes
-
 ###  Personal Area Network (PAN)
 
 .pull-left[
@@ -260,9 +258,8 @@ datos, recursos y servicios.]
 ]
 
 ---
-## Redes
-### Local Area Network (LAN)
 
+### Local Area Network (LAN)
 .pull-left[
 * Dos o mas ordenadores en una vivienda privada o a varios miles de dispositivos en una empresa.
 * Administraciones, colegios o universidades 
@@ -277,7 +274,6 @@ datos, recursos y servicios.]
 ]
 
 ---
-## Redes
 
 ### Por su topologia
 
@@ -287,8 +283,6 @@ datos, recursos y servicios.]
    ![:scale 30%](./img/topologia2.gif)
 ]
 ---
-
-## Redes
 
 ### Preparacion de la PC para las comunicaciones
 
@@ -303,8 +297,6 @@ Para conectar una PC al servicio de internet desde una red LAN (local) tipo Ethe
    ![:scale 35%](./img/internet2-image0.png)
 ]
 ---
-
-## Redes
 
 ### Preparacion de la PC para las comunicaciones
 
@@ -321,7 +313,6 @@ Luego de deben configurar los siguientes elementos  desde el SO.
 ]
 
 ---
-## Redes
 
 ### Clasificacion de IP
 
@@ -335,8 +326,6 @@ Las direcciones IP de tipo comercial se dividen en IP Públicas (Uso Internet) e
 
 ---
 
-## Redes
-
 ### Puertos
 
 Un puerto es un punto final a una conexión lógica y el medio por el que un programa
@@ -346,7 +335,6 @@ cliente se comunica con un programa específico en una computadora en una red
    ![:scale 90%](./img/internet2-image3.png)
 ]
 ---
-## Redes
 
 ### Uso de redes locales
 
@@ -372,7 +360,6 @@ Internet maneja concepto como dirección IP y DNS (Sistema de Nomenclatura de Do
 .center[<iframe width="560" height="315" src="https://www.youtube.com/embed/rw41W8crZ_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]
 
 ---
-## Dominio
 
 ### Registro
 
@@ -401,7 +388,6 @@ La red de Internet es una red de alcance global de tipo WAN. Por lo tanto, un ac
 * Por acceso dedicado a través de un swithc o router (enrutador) 
 
 ---
-## Infraestructura
 
 ### Tipo de accesos: Por acceso telefónico discado (dial-up) 
 
@@ -418,7 +404,6 @@ La red de Internet es una red de alcance global de tipo WAN. Por lo tanto, un ac
 ]
 
 ---
-## Infraestructura
 
 ### Por acceso de banda ancha con ADSL 
 
@@ -433,9 +418,8 @@ La red de Internet es una red de alcance global de tipo WAN. Por lo tanto, un ac
 1. La velocidad de transferencia es superior al dial-up
 ]
 ---
-## Infraestructura
 
-### Por acceso de banda ancha con ADSL 
+### Por acceso de banda ancha satelital
 
 .pull-left[
    ![:scale 100%](./img/internet2-image7.png)
@@ -445,11 +429,10 @@ La red de Internet es una red de alcance global de tipo WAN. Por lo tanto, un ac
 1. Módem de banda ancha satelital (IDU) 
 1. Antena satelital (ODU)
 1. La desventaja que puede presentar es el tiempo de demora de la señal desde y hacia el satélite. 
-1. Lugares en donde es inaccesible la comunicación vía terrestre. 
+1. Como ventaja se puedan acceder a lugares en donde es inaccesible la comunicación vía terrestre. 
 ]
 
 ---
-## Infraestructura
 
 ### Por acceso de banda ancha con radio enlace (wireless) 
 
@@ -464,6 +447,22 @@ unidad exterior (antena de radio) se enlaza con otro remoto (equipo del prestado
 1. Se debe instalar otras redes existentes sobre todo si se trata de la instalación en edificios
 importantes. 
 ]
+
+---
+
+### Por acceso de banda ancha con cable-módem
+
+.pull-left[
+   ![:scale 100%](image-6.png)
+]
+
+.pull-right[
+1. Este servicio lo brindan por lo general los prestadores de TV por cable
+1. Señal en conjunto con la de TV a través de un cable coaxial.
+1. Se utliza canle Ethernet mediante un cable UTP. 
+]
+
+
 ---
 ## Artefactos
 
@@ -476,7 +475,6 @@ Este dispositivo permite asegurar el enrutamiento de paquetes entre redes o dete
 ]
 
 ---
-## Artefactos
 
 ### HUB (repetidor multipuerto) 
 
@@ -488,8 +486,6 @@ Es un dispositivo que permite conectar entre sí otros equipos y retransmite los
 
 ---
 
-## Artefactos
-
 ### SWITCH (conmutador)
 
 Es un dispositivo que interconecta dos o más segmentos de red, como puentes (bridges), transmitiendo datos a puertos (una conexión sea física o lógica para el envío y recepción de datos) específicos. 
@@ -499,7 +495,6 @@ Es un dispositivo que interconecta dos o más segmentos de red, como puentes (br
 ]
 
 ---
-## Infraestructura
 
 ### Software de comunicacion: Hyperterminal
 
@@ -523,7 +518,6 @@ Configuración tipica:
 ]
 
 ---
-## Infraestructura
 
 ### Software de comunicacion: Conexión a Escritorio Remoto
 
@@ -547,7 +541,6 @@ El modelo cliente-servidor, también conocido como “principio cliente-servidor
 Desde su creación, la web fue pensada para funcionar con un cliente y un servidor. El servidor entrega el sitio web a los clientes que lo solicitan. Los clientes son los navegadores web que consumen y muestran ese sitio web.
 
 ---
-## Herramientas de internet
 
 ### Hypertexto y lenguaje HTML
 

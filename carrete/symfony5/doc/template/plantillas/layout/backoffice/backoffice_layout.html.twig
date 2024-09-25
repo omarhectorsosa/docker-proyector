@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{%include "backoffice_head.html.twig" %}
+{%include "backoffice/layout/backoffice_head.html.twig" %}
 
 <body>
    
-    {%include "backoffice_header.html.twig" %}
-    {% include "backoffice_sidebar.html.twig" %}
+    {% include "backoffice/layout/backoffice_header.html.twig" %}
+    {% include "backoffice/layout/backoffice_sidebar.html.twig" %}
 
     <main id="main" class="main">
         {% for message in app.flashes('success') %}
@@ -14,7 +14,7 @@
             {{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div> 
         {% endfor %}
-        {% include "backoffice_title.html.twig" %}
+        {% include "backoffice/layout/backoffice_title.html.twig" %}
         {% for message in app.flashes('success') %}
             <div class="alert alert-success ml-10" style="margin-left:20px; margin-right:20px">
                 {{ message }}
@@ -31,9 +31,9 @@
         
     </main><!-- End #main -->
 
-    {% include "backoffice_footer.html.twig" %}
+    {% include "backoffice/layout/backoffice_footer.html.twig" %}
 
-    {%include "backoffice_javascript.html.twig" %}
+    {% include "backoffice/layout/backoffice_javascript.html.twig" %}
 
 </body>
 </html>

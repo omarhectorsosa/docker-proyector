@@ -1,0 +1,27 @@
+{% extends 'backoffice/layout/backoffice_layout.html.twig' %}
+
+{% block content %}
+
+{% if state ?? false %}
+<section class="section profile">
+   <div class="row">
+      <div class="col-xl-8">
+         <div class="card card-body profile-overview pt-3">
+            
+            <div class="row">
+            <div class="col-lg-3 col-md-4 label ">{{ "backoffice.state.id"|trans }}</div>
+            <div class="col-lg-9 col-md-8">{{ state.id}}</div>
+            </div>
+
+            <div class="row">
+            <div class="col-lg-3 col-md-4 label ">{{ "backoffice.state.name"|trans }}</div>
+            <div class="col-lg-9 col-md-8">{{ state.name}}</div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+</section>
+{% endif %} 
+
+{% endblock %}

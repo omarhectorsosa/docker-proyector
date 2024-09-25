@@ -1,0 +1,50 @@
+{% extends 'backoffice/layout/backoffice_layout.html.twig' %}
+
+{% block content %}
+<section class="section dashboard">
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="x_content">
+          <div class="row mb-2">
+            <div class="col-md-8">
+              <a href="" class="btn btn-success">	{{ "backoffice.global.button_new"|trans }}</a>
+            </div>  
+          </div>  
+        </div>
+      
+        <div class="x_content">
+            <div class="row">
+              <table id="example" class="display table table-striped table-bordered dataminetables">
+                <thead>
+                  <th><input type="checkbox" id="select_all" name="select_all"></th>
+                  <th>{{ "backoffice.state.id"|trans }}</th>
+                  <th>{{ "backoffice.state.name"|trans }}</th>
+                </thead>
+                <tbody>
+                  {% for state in states %}
+                    <tr>
+                      <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ state.id }}"></td>
+                      <td><a href="">{{ state.id }}</a></td>
+                      <td><a href="">{{ state.name }}</a></td>
+                      <td>
+                        <a class="btn btn-primary" href="">
+                          <i class="bi bi-pencil-square"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="" class="btn btn-danger disable-btn del-link" type="submit">
+                          <i class="bi bi-x-square"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}

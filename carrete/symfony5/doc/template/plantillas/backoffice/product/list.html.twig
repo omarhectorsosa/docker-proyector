@@ -1,4 +1,4 @@
-{% extends 'backoffice_layout.html.twig' %}
+{% extends 'backoffice/layout/backoffice_layout.html.twig' %}
 
 {% block content %}
 <section class="section dashboard">
@@ -12,7 +12,7 @@
             </div>  
           </div>  
         </div>
-      
+        {% if products ?? false %}
         <div class="x_content">
             <div class="row">
               <table id="example" class="display table table-striped table-bordered dataminetables">
@@ -27,20 +27,20 @@
                   
                 </thead>
                 <tbody>
-                  {% for producto in productos %}
+                  {% for product in products %}
                     <tr>
-                      <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ producto.id }}"></td>
-                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.name }}</a></td>
-                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.description }}</a></td>
-                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.price }}</a></td>
-                      <td><a href="{{ path('app_backoffice_product_show', {'id': producto.id}) }}">{{ producto.state.name }}</a></td>
+                      <td><input type="checkbox" class="chkgrp" name="chkgrp[]" value="{{ product.id }}"></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': product.id}) }}">{{ product.name }}</a></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': product.id}) }}">{{ product.description }}</a></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': product.id}) }}">{{ product.price }}</a></td>
+                      <td><a href="{{ path('app_backoffice_product_show', {'id': product.id}) }}">{{ product.state.name }}</a></td>
                       <td>
-                        <a class="btn btn-primary" href="{{ path('app_backoffice_product_edit', {'id': producto.id}) }}">
+                        <a class="btn btn-primary" href="{{ path('app_backoffice_product_edit', {'id': product.id}) }}">
                           <i class="bi bi-pencil-square"></i>
                         </a>
                       </td>
                       <td>
-                        <a href="{{ path('app_backoffice_product_delete', {'id': producto.id}) }}" class="btn btn-danger disable-btn del-link" type="submit">
+                        <a href="{{ path('app_backoffice_product_delete', {'id': product.id}) }}" class="btn btn-danger disable-btn del-link" type="submit">
                           <i class="bi bi-x-square"></i>
                         </a>
                       </td>
@@ -51,6 +51,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
     </div>
 </div>
 </section>

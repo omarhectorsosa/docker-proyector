@@ -164,6 +164,35 @@ Los programas se programan y son escrituras que ocupan su espacio dentro de nues
 .pull-right[
 	![:scale 80%](./img/image-20220330152539474.png)
 ]
+
+---
+
+## Equivalencia entre unidades 
+
+Para poder convertir de una unidad origen a una destino se pueden usar la regla de tres simple: 
+
+Vamos a convertir los 512 MB a GB. La relación de conversión, de acuerdo con la tabla descrita anteriormente, es 1 GB = 1024 MB, por lo que se puede resolver con una regla de tres simple.
+
+.pull-center[
+  ![:scale 80%](image.png)
+]
+
+Para resolver esto el cálculo será 512 * 1 / 1024 = 0,5 GB
+Por lo tanto, un pendrive de 512 MB equivale a 0,5 GB.
+
+---
+
+## Equivalencia entre unidades 
+
+Si 1 GB es 1024 MB, 4,7 GB ¿cuánto es? 
+
+.pull-center[
+  ![:scale 80%](image-1.png)
+]
+
+Para resolver esto el cálculo será 4,7 * 1024 / 1 = 4812,8 MB
+Por lo tanto, un DVD de 4,7 GB equivale a 4812,8 MB.
+
 ---
 # Unidad de procesamiento
 
