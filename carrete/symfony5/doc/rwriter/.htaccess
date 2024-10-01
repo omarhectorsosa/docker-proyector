@@ -1,0 +1,15 @@
+#Header set Access-Control-Allow-Origin "localhost"
+   <IfModule mod_rewrite.c>
+       RewriteEngine On
+       RewriteCond %{HTTP:Authorization} ^(.*)
+       RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+   
+       #### REGLAS PARA MANTENIMIENTO - INCIO ####
+       ErrorDocument 503 https://webui.psa.com.ar/updating/?from=https://%{HTTP_HOST}%{REQUEST_URI}
+       RewriteCond %{DOCUMENT_ROOT}/actualizando -f
+       RewriteRule !^(backoffice|_wdt|_profiler|build|index.php)($|/) / [R=503,L]
+       #### REGLAS PARA MANTENIMIENTO - FIN ####   
+           
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteRule ^(.*)$ index.php [QSA,L]
+   </IfModule>

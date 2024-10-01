@@ -29,26 +29,28 @@ class: animated fadeInUp
 * Inicio de proyecto
    - Symfony `new project`
    - Caracteristicas del proyecto
-   - Correr en proyecto Symfony `server:start` 
+   - Archivos de configuracion `.env` y `.env.local`
+   - Archivo `.htaccess`
+   - Utilizar `Docker` para la BD y el servidor WEB
    - Creacion `controlador` y `template`
+   - Instalación y uso de `monolog` para registrar los mensajes en el logs
 * Creando un proyecto a partir de un modelo de negocio
    - Presentacion de modelo de negocio
-   - Algo de `mysql`
-   - Archivos de configuracion `.env` y `.env.local`
-   - Creacion de los controladores y template
-   - Creacion de las estructura de tablas 
-   - Listar, Agregar, Eliminar y Modificar Producto
+   - Entidad, Controlador y vista de `Estado`
+   - Concepto de `Fixture`
    - Incluir mensaje en la vista
-
+   - Translation
+    - Definición de transalation
+    - Configuración de translation
 ---
-## Agenda
-* Fremework Boostrap
+
+## Agenda    
+   - Fremework Boostrap
     - Armar el HOME del Frontoffice y Backoffice
     - Armar vista ABM backoffice de las entidades `Product` 
-* Translation
-    - Definicion de transalation
-    - Configuración de translation
-
+   - Creacion de los controladores y template
+   - Creacion de las estructura de tablas 
+   - Metodos Listar, Agregar, Eliminar y Modificar Producto
 
 ---
 ## Agenda
@@ -229,38 +231,60 @@ MAILER_URL=smtp://mail.psasender.com.ar:587?username=senderauth@psasender.com.ar
 
 # Inicio de proyecto
 
-## Algo de mysql 
+## Correr el base de datos y el servidor Web
 
-Se debe comprobar la comprobacion a una conexion de base de datos 
+Teniendo las imagenes que corresponden en los [Docker Hub](https://hub.docker.com/)
+Subimos al proyecto el [docker-composer.json](./docker/docker-compose.yml) 
 
-```markdow 
-$ mysql -uroot -p 
+```json
 
-mysql> show databases;
-
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-4 rows in set (0.02 sec)
-
+services:
+  database:
+    image: ososa2022/mariadb-10.2.7:1.0.2
+    network_mode: host
+    environment:
+      MYSQL_ROOT_PASSWORD: **3d@x**
+      MYSQL_USER: ososa
+      MYSQL_PASSWORD: ososa123
+      MYSQL_DATABASE: temp
+    restart: unless-stopped
+    //..
+  web:
+    image: ososa2022/php-symfony-8.1.0:1.0.1
+    //..
+volumes:
+  mariadb_local_volume:
+    driver: local
 ```
 
 ---
 
 # Inicio de proyecto
 
-## Creo la base de datos en base a la configuración
+# Configura el archivos `htaccess`
+
+LLevar a public el archivo [.htaccess](./rwriter/.htaccess) para ordenar los accesos 
+
+```bash
+   <IfModule mod_rewrite.c>
+       RewriteEngine On
+       RewriteCond %{HTTP:Authorization} ^(.*)
+       RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]   
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteRule ^(.*)$ index.php [QSA,L]
+   </IfModule>
+```
+---
+
+# Inicio de proyecto
+
+## Creo la base de datos en base a la configuración (en el caso que no exista)
 
 Luego se debe ejecutar el siguiente comando 
 
 ```markdow 
 $ symfony console doctrine:database:create
-Created database `perfumeria` for connection named default
+Created database `temp` for connection named default
 ```
 
 Finalizando, compruebo la base de datos creada
@@ -270,7 +294,7 @@ mysql> show databases;
 +--------------------+
 | Database           |
 +--------------------+
-| perfumeria         |
+| temp               |
 +--------------------+
 ```
 
@@ -278,46 +302,6 @@ Es posible instalar el paquete `Doctrine ORM`  corriendo el comando `$ composer 
 
 ---
 
-# Inicio de proyecto
-
-## Correr aplicacion desde Symfony CLI
-
-Se puede correro  el proyecto en segundo plano, ver el estado del servidor y su log:
-
-```markdow
-$ symfony server:start -d 
-$ symfony server:start --port=8081 -d
-$ symfony server:status
-$ symfony server:log
-$ symfony server:stop
-```
----
-
-
-# Inicio de proyecto
-
-## Correr aplicación 
-
-Luego de haber comprobado la insatalacion, debemos ubicarnos en el proyecto y correr el servidor
-
-```markdow
-$ symfony server:start
-
- [WARNING] run "symfony server:ca:install" first if you want to run the web server with TLS support, or use
- "--no-tls" to avoid this warning
-
-Apr 25 17:31:48 |DEBUG| PHP    Reloading PHP versions 
-Apr 25 17:31:48 |DEBUG| PHP    Using PHP version 7.2.24 (from default version in $PATH) 
-Apr 25 17:31:48 |INFO | PHP    listening path="/usr/bin/php7.2" php="7.2.24" port=35249
-Apr 25 17:31:48 |DEBUG| PHP    started 
-                                                                                                                
- [OK] Web server listening
-      The Web server is using PHP CLI 7.2.24
-                                                                                                           
-      http://127.0.0.1:8001
-                                                                   
-```
----
 # Inicio de proyecto
 
 ## Visualizar aplicacion
@@ -461,6 +445,64 @@ Utilizar el `namespace` para ubicar el controlador en otro nivel de carpeta.
 
 # Inicio del proyecto
 
+## Mensaje en el sistema de logs
+
+Sobre el `IndexContoller.php` utilizo el log
+
+```php
+namespace App\Controller;
+
+use Psr\Log\LoggerInterface;
+//...
+class IndexController extends AbstractController
+{
+    /**
+     * @Route("/", name="app_index")
+     */
+    public function index(LoggerInterface $logger): Response
+    {
+        $logger->info('MJE-0001: Este es un mensaje de log en el entorno prod.');
+
+        return $this->render('index/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
+}
+```
+---
+
+# Inicio del proyecto
+
+## Configuro el monolog
+
+Configuro el archivo `config/packages/prod/monolog.yaml`
+
+```yaml
+monolog:
+    handlers:
+        nested:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: info
+```            
+
+Y limpio la cache
+
+```bash
+$ php bin/console cache:clear --env=prod
+```
+
+Si no se tiene el monolog instalado correr la siguiente sentencia
+
+```bash
+$ composer require symfony/monolog-bundle
+```
+[Fuente](https://symfony.com/doc/current/logging.html)
+
+---
+
+# Inicio del proyecto
+
 ## Construyo el template del home del backoffice y frontoffice
 
 Agrego el template `template/backoffice/index.html.twig`
@@ -485,7 +527,7 @@ El modelo de negocio se basaria en estas tres entidades. `Producto, Cliente y Ve
    ![:scale 80%](./img/der.png)
 ]
 
-[PlantUml](https://www.plantuml.com/plantuml/uml/NP11QmCX48NlyoiUUqfBzz3hdW9j0w5GKa9-WEWq4LmDEaiFeV-zSNLtmrvqVBvvVkCsYOeoz8uS_mWa8DhpHM1iP2qsU2BjL4eun606BRY1O4s7lHS-SoHurNE7eqJhpmJ3IKTxpPsBU8XMtpqx5vGGshQzBt0soUOfL-aIVal5nbRDi6FXKdk-NuF-9fIt8KdeEU9665biOS7Xax3YWV5sWHsVHX8bsPAt9VMe7ASfSV-OQ4RxUtQNW6lvYsx-b5sswOhLpO15FttjlqyVczhqCjaU9YeeM3s-cYMxQKvkNXkqBPhdfe3JkERp95SsgdkzoerrSjgoDqFl_W40)
+[PlantUml](https://www.plantuml.com/plantuml/uml/NP3DQiCm48Jl-nI3Jscf3xtw56WR28MI4l80Gjec0baAqfeUGj-zbkKVuukqZ4Qpt-u-YOhIjOuS_mWa8DhhJM1iP2qsU2BjL4eunM0wBNY0O4s3enU-SYHurNA3iqJhhmJ3IKTxppyNyHIjxZq75vGGwhhk3pYRPFUKgtGBlwLYOqVDi6FXKdlkdq5_4yfRboIq7F4W32osiE3qITZmm7Yxm0wjaKH9jkHhIJqhnsbAFAuJpM1_p-uIS2-xQEQb7B9DZrZD35ZqozVn-_An6p-zJBRLH0K5c-QRMRARvkJgjK9Tetgk2ZWDvreUsMYyivQVigDClcTlkjRz0m00)
 
 ---
 
@@ -1530,22 +1572,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 ```
 ---
 
-
 # Manejo de servicios
 
 ## Conceptos de servicio
 
-Los servicios funcionan de forma independiente al resto de la aplicación, a fin de cuentas, son clases independientes
+Los servicios funcionan de forma independiente al resto de la aplicación, a fin de cuentas, son clases independientes.
+
+Los servicios en Symfony suelen interpretarse como ayuda o funcionalidades que se requieren en algunas accion de los controladores y son partes generica de uso, un ejemplo simple sería la subida de archivos en los servidores web. 
 
 Los servicios se construyen en `src/Service/` y se definen en `config/services.yml`
 
----
-
-# Manejo de servicios
-
-## Uploader Service
-
-[Uploader Service](https://symfony.com/doc/current/controller/upload_file.html#creating-an-uploader-service)
+En el ejemplo de [Uploader Service](https://symfony.com/doc/5.x/controller/upload_file.html#creating-an-uploader-service) puede describirse el desarrollo, configuracion y uso del servicio por parte del controladores Producto.
 
 ---
 
@@ -1681,8 +1718,6 @@ $builder
             ]);
 //..
 ```
-
-
 
 ----
 

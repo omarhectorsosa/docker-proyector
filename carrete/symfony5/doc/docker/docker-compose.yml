@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  database:
+    image: ososa2022/mariadb-10.2.7:1.0.2
+    network_mode: host
+    environment:
+      MYSQL_ROOT_PASSWORD: 3d@8gWieLx
+      MYSQL_USER: ososa
+      MYSQL_PASSWORD: ososa123
+      MYSQL_DATABASE: temp
+    restart: unless-stopped
+    volumes:
+      - mariadb_local_volume:/var/lib/mysql
+
+  web:
+    image: ososa2022/php-symfony-8.1.0:1.0.1
+    network_mode: host
+    volumes:
+      - .:/var/www/
+    depends_on:
+      - database
+volumes:
+  mariadb_local_volume:
+    driver: local
